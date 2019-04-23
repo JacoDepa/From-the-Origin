@@ -27,6 +27,7 @@ func _on_build_hut_input_event(viewport, event, shape_idx):
 			if event.is_pressed():
 				hut += 1
 				pop += 4
+				# TODO: we need to check how to avoid population to increase when not required
 	if hut >= 1:
 		self.visible = true
 	pass # Replace with function body.
