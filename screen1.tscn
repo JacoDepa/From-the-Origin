@@ -1,0 +1,296 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://test.gd" type="Script" id=1]
+[ext_resource path="res://wood.gd" type="Script" id=2]
+[ext_resource path="res://stone.gd" type="Script" id=3]
+[ext_resource path="res://nstone.gd" type="Script" id=4]
+[ext_resource path="res://build_hut.gd" type="Script" id=5]
+[ext_resource path="res://nhut.gd" type="Script" id=6]
+[ext_resource path="res://npopulation.gd" type="Script" id=7]
+[ext_resource path="res://gather_food.gd" type="Script" id=8]
+[ext_resource path="res://nfood.gd" type="Script" id=9]
+[ext_resource path="res://lumberjack+.gd" type="Script" id=10]
+[ext_resource path="res://lumberjack-.gd" type="Script" id=11]
+[ext_resource path="res://nlumberjack.gd" type="Script" id=12]
+[ext_resource path="res://stone_gatherer+.gd" type="Script" id=13]
+[ext_resource path="res://srone_gatherer-.gd" type="Script" id=14]
+[ext_resource path="res://nstone_gatherer.gd" type="Script" id=15]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 80.514, 18.2116 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 82.7871, 17.3793 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 130, 20 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 80, 15.5057 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 14.7215, 10 )
+
+[sub_resource type="RectangleShape2D" id=6]
+
+[node name="Node" type="Node"]
+script = ExtResource( 1 )
+
+[node name="gather_wood" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 100, 33.2387 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gather_wood"]
+shape = SubResource( 1 )
+
+[node name="Label" type="Label" parent="gather_wood"]
+margin_left = -78.0211
+margin_top = -13.718
+margin_right = -0.0211182
+margin_bottom = 0.282013
+rect_scale = Vector2( 2, 2 )
+text = "gather wood"
+
+[node name="nwood" type="RichTextLabel" parent="."]
+margin_left = 425.455
+margin_top = 16.5262
+margin_right = 539.455
+margin_bottom = 34.5262
+rect_scale = Vector2( 2, 2 )
+text = "wood: 0"
+
+[node name="gather_stone" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 102.757, 80 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="gather_stone"]
+margin_left = -79.0071
+margin_top = -14.6611
+margin_right = 0.99292
+margin_bottom = -0.661102
+rect_scale = Vector2( 2, 2 )
+text = "gather stone"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gather_stone"]
+position = Vector2( -1.62903, 0 )
+shape = SubResource( 2 )
+
+[node name="nstone" type="RichTextLabel" parent="."]
+margin_left = 426.545
+margin_top = 61.9649
+margin_right = 542.545
+margin_bottom = 78.9649
+rect_scale = Vector2( 2, 2 )
+text = "stone: 0"
+script = ExtResource( 4 )
+
+[node name="build_hut" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 70, 120 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="build_hut"]
+position = Vector2( 70, 0 )
+shape = SubResource( 3 )
+
+[node name="Label" type="Label" parent="build_hut"]
+margin_left = -50.0
+margin_top = -10.0
+margin_right = 7.0
+margin_bottom = 4.0
+rect_scale = Vector2( 2, 2 )
+text = "build hut (50 wood)"
+
+[node name="nhut" type="RichTextLabel" parent="."]
+margin_left = 426.545
+margin_top = 104.965
+margin_right = 542.545
+margin_bottom = 124.965
+rect_scale = Vector2( 2, 2 )
+text = "hut: 0"
+script = ExtResource( 6 )
+
+[node name="npopulation" type="RichTextLabel" parent="."]
+margin_left = 427.0
+margin_top = 145.0
+margin_right = 548.0
+margin_bottom = 164.0
+rect_scale = Vector2( 2, 2 )
+text = "population : 0"
+script = ExtResource( 7 )
+
+[node name="gather_food" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 92.0032, 152.556 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gather_food"]
+position = Vector2( 0, 10 )
+shape = SubResource( 4 )
+
+[node name="Label" type="Label" parent="gather_food"]
+margin_left = -73.4295
+margin_top = -4.85574
+margin_right = -1.4295
+margin_bottom = 9.14426
+rect_scale = Vector2( 2, 2 )
+text = "gather food"
+
+[node name="nfood" type="RichTextLabel" parent="."]
+margin_left = 426.545
+margin_top = 186.965
+margin_right = 539.545
+margin_bottom = 208.965
+rect_scale = Vector2( 2, 2 )
+text = "food: 0"
+script = ExtResource( 9 )
+
+[node name="lumberjack+" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 961.021, 29.4136 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="lumberjack+"]
+position = Vector2( -0.487679, 0.487675 )
+shape = SubResource( 5 )
+
+[node name="Label" type="Label" parent="lumberjack+"]
+margin_left = -7.493
+margin_top = -13.0
+margin_right = 16.507
+margin_bottom = 1.00001
+rect_scale = Vector2( 2, 2 )
+text = "+ /"
+
+[node name="lumberjack-" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 1001.43, 30.0024 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="lumberjack-"]
+shape = SubResource( 6 )
+
+[node name="Label" type="Label" parent="lumberjack-"]
+margin_left = -6.0
+margin_top = -24.0
+margin_right = 5.0
+margin_bottom = -10.0
+rect_scale = Vector2( 2, 2 )
+text = "_"
+
+[node name="nlumberjack" type="Label" parent="."]
+margin_left = 735.119
+margin_top = 17.6227
+margin_right = 822.119
+margin_bottom = 31.6227
+rect_scale = Vector2( 2, 2 )
+text = "lumberjack: 0"
+script = ExtResource( 12 )
+
+[node name="stone_gatherer+" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 969.183, 70.2245 )
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="stone_gatherer+"]
+position = Vector2( -0.487679, 0.487675 )
+shape = SubResource( 5 )
+
+[node name="Label" type="Label" parent="stone_gatherer+"]
+margin_left = -7.493
+margin_top = -13.0
+margin_right = 16.507
+margin_bottom = 1.00001
+rect_scale = Vector2( 2, 2 )
+text = "+ /"
+
+[node name="srone_gatherer-" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 1009.12, 70.0618 )
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="srone_gatherer-"]
+shape = SubResource( 6 )
+
+[node name="Label" type="Label" parent="srone_gatherer-"]
+margin_left = -6.0
+margin_top = -24.0
+margin_right = 5.0
+margin_bottom = -10.0
+rect_scale = Vector2( 2, 2 )
+text = "_"
+
+[node name="nstone_gatherer" type="Label" parent="."]
+margin_left = 733.759
+margin_top = 59.794
+margin_right = 842.759
+margin_bottom = 73.794
+rect_scale = Vector2( 2, 2 )
+text = "stone gatherer: 0"
+script = ExtResource( 15 )
+
+[connection signal="input_event" from="gather_wood" to="lumberjack+" method="_on_gather_wood_input_event"]
+[connection signal="input_event" from="gather_wood" to="gather_food" method="_on_gather_wood_input_event"]
+[connection signal="input_event" from="gather_wood" to="build_hut" method="_on_gather_wood_input_event"]
+[connection signal="input_event" from="gather_wood" to="gather_stone" method="_on_gather_wood_input_event"]
+[connection signal="input_event" from="gather_wood" to="gather_wood" method="_on_Area2D_input_event" flags=3]
+[connection signal="input_event" from="gather_wood" to="npopulation" method="_on_gather_wood_input_event"]
+[connection signal="input_event" from="gather_wood" to="nhut" method="_on_gather_wood_input_event"]
+[connection signal="input_event" from="gather_wood" to="nfood" method="_on_gather_wood_input_event"]
+[connection signal="input_event" from="gather_wood" to="nstone" method="_on_gather_wood_input_event"]
+[connection signal="input_event" from="gather_wood" to="nlumberjack" method="_on_gather_wood_input_event"]
+[connection signal="input_event" from="gather_wood" to="lumberjack-" method="_on_gather_wood_input_event"]
+[connection signal="input_event" from="gather_wood" to="stone_gatherer+" method="_on_gather_wood_input_event"]
+[connection signal="input_event" from="gather_wood" to="nstone_gatherer" method="_on_gather_wood_input_event"]
+[connection signal="input_event" from="gather_wood" to="srone_gatherer-" method="_on_gather_wood_input_event"]
+[connection signal="input_event" from="gather_stone" to="gather_stone" method="_on_stone_input_event" flags=3]
+[connection signal="input_event" from="build_hut" to="lumberjack+" method="_on_build_hut_input_event"]
+[connection signal="input_event" from="build_hut" to="gather_food" method="_on_build_hut_input_event"]
+[connection signal="input_event" from="build_hut" to="build_hut" method="_on_build_hut_input_event"]
+[connection signal="input_event" from="build_hut" to="gather_wood" method="_on_build_hut_input_event"]
+[connection signal="input_event" from="build_hut" to="nfood" method="_on_build_hut_input_event"]
+[connection signal="input_event" from="build_hut" to="nlumberjack" method="_on_build_hut_input_event"]
+[connection signal="input_event" from="build_hut" to="lumberjack-" method="_on_build_hut_input_event"]
+[connection signal="input_event" from="build_hut" to="stone_gatherer+" method="_on_build_hut_input_event"]
+[connection signal="input_event" from="build_hut" to="nstone_gatherer" method="_on_build_hut_input_event"]
+[connection signal="input_event" from="build_hut" to="srone_gatherer-" method="_on_build_hut_input_event"]
+[connection signal="input_event" from="gather_food" to="gather_food" method="_on_Area2D_input_event"]
+[connection signal="input_event" from="lumberjack+" to="lumberjack+" method="_on_lumberjack_input_event"]
+[connection signal="input_event" from="lumberjack+" to="gather_wood" method="_on_lumberjack_input_event"]
+[connection signal="input_event" from="lumberjack+" to="nlumberjack" method="_on_lumberjack_input_event"]
+[connection signal="input_event" from="lumberjack+" to="lumberjack-" method="_on_lumberjackplus_input_event"]
+[connection signal="input_event" from="lumberjack-" to="lumberjack+" method="_on_lumberjackminus_input_event"]
+[connection signal="input_event" from="lumberjack-" to="gather_wood" method="_on_lumberjack_input_event"]
+[connection signal="input_event" from="lumberjack-" to="." method="_on_lumberjackminus_input_event"]
+[connection signal="input_event" from="lumberjack-" to="nlumberjack" method="_on_lumberjack_input_event"]
+[connection signal="input_event" from="lumberjack-" to="lumberjack-" method="_on_lumberjack_input_event"]
+[connection signal="input_event" from="stone_gatherer+" to="stone_gatherer+" method="_on_stone_gatherer_plus_input_event"]
+[connection signal="input_event" from="stone_gatherer+" to="srone_gatherer-" method="_on_stone_gatherer_plus_input_event"]
+[connection signal="input_event" from="srone_gatherer-" to="stone_gatherer+" method="_on_srone_gatherer_min_input_event"]
+[connection signal="input_event" from="srone_gatherer-" to="srone_gatherer-" method="_on_srone_gatherer_min_input_event"]
