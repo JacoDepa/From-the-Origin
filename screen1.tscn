@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://test.gd" type="Script" id=1]
 [ext_resource path="res://wood.gd" type="Script" id=2]
@@ -9,8 +9,6 @@
 [ext_resource path="res://npopulation.gd" type="Script" id=7]
 [ext_resource path="res://gather_food.gd" type="Script" id=8]
 [ext_resource path="res://nfood.gd" type="Script" id=9]
-[ext_resource path="res://nlumberjack.gd" type="Script" id=10]
-[ext_resource path="res://nstone_gatherer.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 80.514, 18.2116 )
@@ -28,6 +26,8 @@ extents = Vector2( 80, 15.5057 )
 extents = Vector2( 14.7215, 10 )
 
 [sub_resource type="RectangleShape2D" id=6]
+
+[sub_resource type="RectangleShape2D" id=7]
 
 [node name="Node" type="Node"]
 script = ExtResource( 1 )
@@ -199,7 +199,6 @@ margin_right = 822.119
 margin_bottom = 31.6227
 rect_scale = Vector2( 2, 2 )
 text = "lumberjack: 0"
-script = ExtResource( 10 )
 
 [node name="stone_gatherer+" type="Area2D" parent="."]
 editor/display_folded = true
@@ -245,64 +244,77 @@ margin_right = 842.759
 margin_bottom = 73.794
 rect_scale = Vector2( 2, 2 )
 text = "stone gatherer: 0"
-script = ExtResource( 11 )
 
-[connection signal="input_event" from="gather_wood" to="stone_gatherer-" method="_on_gather_wood_input_event"]
-[connection signal="input_event" from="gather_wood" to="stone_gatherer+" method="_on_gather_wood_input_event"]
-[connection signal="input_event" from="gather_wood" to="lumberjack-" method="_on_gather_wood_input_event"]
-[connection signal="input_event" from="gather_wood" to="lumberjack+" method="_on_gather_wood_input_event"]
+[node name="farmer+" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 889.697, 117.46 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="farmer+"]
+shape = SubResource( 7 )
+
+[node name="Label" type="Label" parent="farmer+"]
+margin_left = -6.81119
+margin_top = -13.2639
+margin_right = 33.1888
+margin_bottom = 0.736107
+rect_scale = Vector2( 2, 2 )
+text = "+ /"
+
+[node name="farmer-" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 932.346, 117.878 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="farmer-"]
+shape = SubResource( 7 )
+
+[node name="Label" type="Label" parent="farmer-"]
+margin_left = -5.55679
+margin_top = -24.5531
+margin_right = 34.4432
+margin_bottom = -10.5531
+rect_scale = Vector2( 2, 2 )
+text = "_"
+
+[node name="nfarmer" type="RichTextLabel" parent="."]
+margin_left = 734.746
+margin_top = 105.073
+margin_right = 801.746
+margin_bottom = 123.073
+rect_scale = Vector2( 2, 2 )
+text = "farmer: 0"
+
+[connection signal="input_event" from="gather_wood" to="gather_food" method="_on_gather_wood_input_event"]
+[connection signal="input_event" from="gather_wood" to="build_hut" method="_on_gather_wood_input_event"]
 [connection signal="input_event" from="gather_wood" to="gather_stone" method="_on_gather_wood_input_event"]
 [connection signal="input_event" from="gather_wood" to="gather_wood" method="_on_Area2D_input_event" flags=3]
 [connection signal="input_event" from="gather_wood" to="." method="_on_gather_wood_input_event"]
 [connection signal="input_event" from="gather_wood" to="nfood" method="_on_gather_wood_input_event"]
-[connection signal="input_event" from="gather_wood" to="build_hut" method="_on_gather_wood_input_event"]
-[connection signal="input_event" from="gather_wood" to="nstone" method="_on_gather_wood_input_event"]
 [connection signal="input_event" from="gather_wood" to="nhut" method="_on_gather_wood_input_event"]
 [connection signal="input_event" from="gather_wood" to="npopulation" method="_on_gather_wood_input_event"]
-[connection signal="input_event" from="gather_wood" to="gather_food" method="_on_gather_wood_input_event"]
-[connection signal="input_event" from="gather_wood" to="nlumberjack" method="_on_gather_wood_input_event"]
-[connection signal="input_event" from="gather_wood" to="nstone_gatherer" method="_on_gather_wood_input_event"]
-[connection signal="input_event" from="gather_stone" to="stone_gatherer+" method="_on_gather_stone_input_event"]
+[connection signal="input_event" from="gather_wood" to="nstone" method="_on_gather_wood_input_event"]
 [connection signal="input_event" from="gather_stone" to="gather_stone" method="_on_stone_input_event" flags=3]
 [connection signal="input_event" from="gather_stone" to="." method="_on_gather_stone_input_event"]
-[connection signal="input_event" from="build_hut" to="stone_gatherer-" method="_on_build_hut_input_event"]
-[connection signal="input_event" from="build_hut" to="stone_gatherer+" method="_on_build_hut_input_event"]
-[connection signal="input_event" from="build_hut" to="lumberjack-" method="_on_build_hut_input_event"]
-[connection signal="input_event" from="build_hut" to="lumberjack+" method="_on_build_hut_input_event"]
+[connection signal="input_event" from="build_hut" to="gather_food" method="_on_build_hut_input_event"]
+[connection signal="input_event" from="build_hut" to="build_hut" method="_on_build_hut_input_event"]
 [connection signal="input_event" from="build_hut" to="gather_stone" method="_on_build_hut_input_event"]
 [connection signal="input_event" from="build_hut" to="gather_wood" method="_on_build_hut_input_event"]
 [connection signal="input_event" from="build_hut" to="." method="_on_build_hut_input_event"]
 [connection signal="input_event" from="build_hut" to="nfood" method="_on_build_hut_input_event"]
-[connection signal="input_event" from="build_hut" to="build_hut" method="_on_build_hut_input_event"]
-[connection signal="input_event" from="build_hut" to="gather_food" method="_on_build_hut_input_event"]
-[connection signal="input_event" from="build_hut" to="nlumberjack" method="_on_build_hut_input_event"]
 [connection signal="input_event" from="build_hut" to="nstone_gatherer" method="_on_build_hut_input_event"]
-[connection signal="input_event" from="gather_food" to="." method="_on_gather_food_input_event"]
 [connection signal="input_event" from="gather_food" to="gather_food" method="_on_Area2D_input_event"]
-[connection signal="input_event" from="lumberjack+" to="stone_gatherer-" method="_on_lumberjack_input_event"]
-[connection signal="input_event" from="lumberjack+" to="stone_gatherer+" method="_on_lumberjack_input_event"]
-[connection signal="input_event" from="lumberjack+" to="lumberjack-" method="_on_lumberjackplus_input_event"]
+[connection signal="input_event" from="gather_food" to="." method="_on_gather_food_input_event"]
 [connection signal="input_event" from="lumberjack+" to="lumberjack+" method="_on_lumberjack_input_event"]
-[connection signal="input_event" from="lumberjack+" to="gather_wood" method="_on_lumberjack_input_event"]
 [connection signal="input_event" from="lumberjack+" to="." method="_on_lumberjack_input_event"]
-[connection signal="input_event" from="lumberjack+" to="nlumberjack" method="_on_lumberjack_input_event"]
-[connection signal="input_event" from="lumberjack-" to="stone_gatherer-" method="_on_lumberjack_min_input_event"]
-[connection signal="input_event" from="lumberjack-" to="stone_gatherer+" method="_on_lumberjack_min_input_event"]
-[connection signal="input_event" from="lumberjack-" to="lumberjack-" method="_on_lumberjack_input_event"]
-[connection signal="input_event" from="lumberjack-" to="lumberjack+" method="_on_lumberjackminus_input_event"]
-[connection signal="input_event" from="lumberjack-" to="gather_wood" method="_on_lumberjack_input_event"]
-[connection signal="input_event" from="lumberjack-" to="." method="_on_lumberjackminus_input_event"]
 [connection signal="input_event" from="lumberjack-" to="." method="_on_lumberjack_min_input_event"]
-[connection signal="input_event" from="lumberjack-" to="nlumberjack" method="_on_lumberjack_input_event"]
-[connection signal="input_event" from="stone_gatherer+" to="stone_gatherer-" method="_on_stone_gatherer_plus_input_event"]
 [connection signal="input_event" from="stone_gatherer+" to="stone_gatherer+" method="_on_stone_gatherer_plus_input_event"]
-[connection signal="input_event" from="stone_gatherer+" to="lumberjack-" method="_on_stone_gatherer_input_event"]
-[connection signal="input_event" from="stone_gatherer+" to="lumberjack+" method="_on_stone_gatherer_input_event"]
-[connection signal="input_event" from="stone_gatherer+" to="gather_stone" method="_on_stone_gatherer_input_event"]
 [connection signal="input_event" from="stone_gatherer+" to="." method="_on_stone_gatherer_input_event"]
-[connection signal="input_event" from="stone_gatherer-" to="stone_gatherer-" method="_on_srone_gatherer_min_input_event"]
-[connection signal="input_event" from="stone_gatherer-" to="stone_gatherer+" method="_on_srone_gatherer_min_input_event"]
-[connection signal="input_event" from="stone_gatherer-" to="lumberjack-" method="_on_srone_gatherer_min_input_event"]
-[connection signal="input_event" from="stone_gatherer-" to="lumberjack+" method="_on_srone_gatherer_min_input_event"]
-[connection signal="input_event" from="stone_gatherer-" to="gather_stone" method="_on_srone_gatherer_min_input_event"]
 [connection signal="input_event" from="stone_gatherer-" to="." method="_on_stone_gatherer_min_input_event"]
+[connection signal="input_event" from="stone_gatherer-" to="stone_gatherer-" method="_on_srone_gatherer_min_input_event"]
+[connection signal="input_event" from="farmer+" to="." method="_on_farmer_input_event"]
+[connection signal="input_event" from="farmer-" to="." method="_on_farmer_min_input_event"]
