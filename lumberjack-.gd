@@ -4,6 +4,9 @@ onready var wood = 0
 onready var hut = 0
 onready var lumberjack = 0
 onready var pop = 0
+onready var nwood = 50
+onready var flag = 1
+onready var stone_gatherer = 0
 
 func _ready():
 	self.visible = false
@@ -22,12 +25,17 @@ func _on_lumberjack_input_event(viewport, event, shape_idx):
 
 
 func _on_build_hut_input_event(viewport, event, shape_idx):
-	if wood >= 50:
+	if wood >= nwood:
 		if event is InputEvent:
 			if event.is_pressed():
 				hut += 1
 				pop += 4
-				# TODO: we need to check how to avoid population to increase when not required
+				flag = 1
+				
+	if hut >= 1 and flag == 1:
+		flag = 0
+		nwood += 50
+	
 	if hut >= 1:
 		self.visible = true
 	pass # Replace with function body.
@@ -46,4 +54,22 @@ func _on_lumberjackplus_input_event(viewport, event, shape_idx):
 			if event.is_pressed():
 				lumberjack += 1
 				pop -= 1
+	pass # Replace with function body.
+
+
+func _on_srone_gatherer_min_input_event(viewport, event, shape_idx):
+	if event is InputEvent:
+		if event.is_pressed():
+			if pop > 0:
+				stone_gatherer += 1
+				pop -= 1
+	pass # Replace with function body.
+
+
+func _on_stone_gatherer_input_event(viewport, event, shape_idx):
+	if stone_gatherer >= 1:
+		if event is InputEvent:
+			if event.is_pressed():
+				stone_gatherer -= 1
+				pop += 1
 	pass # Replace with function body.

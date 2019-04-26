@@ -16,8 +16,8 @@ func _ready():
 	timer.set_wait_time(delay)
 	timer.connect("timeout", self, "on_timeout_complete")
 	add_child(timer)
-	print("dentro func_ready")
-	print(timer)
+	#print("dentro func_ready")
+	#print(timer)
 	pass
 
 func on_timeout_complete():
@@ -52,9 +52,9 @@ func _on_build_hut_input_event(viewport, event, shape_idx):
 
 
 
-func _on_lumberjackplus_input_event(viewport, event, shape_idx):
+#func _on_lumberjackplus_input_event(viewport, event, shape_idx):
 	
-	pass # Replace with function body.
+	#pass # Replace with function body.
 
 
 func _on_lumberjackminus_input_event(viewport, event, shape_idx):
