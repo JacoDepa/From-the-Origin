@@ -21,6 +21,11 @@ onready var can_gather_wood = true
 onready var can_gather_stone = true
 onready var can_gather_food = true
 
+#food timer
+onready var food_pay_timer = null
+onready var food_pay_delay = 2500
+onready var time_to_pay_food = true
+
 #Buttons
 onready var gather_stone = get_node("gather_stone")
 onready var build_hut = get_node("build_hut")
@@ -75,6 +80,13 @@ func _ready():
 	timerFood.connect("timeout", self, "on_timeout_complete_food")
 	add_child(timerFood)
 	
+	#time to pay food timer
+	food_pay_timer = Timer.new()
+	food_pay_timer.set_one_shot(true)
+	food_pay_timer.set_wait_time(food_pay_delay)
+	food_pay_timer.connect("time_to_pay_food", self, "time_to_pay_food")
+	add_child(food_pay_timer)
+	
 	#makes works and workes num non visible
 	lumberjack_plus.visible = false
 	lumbrjack_min.visible = false
@@ -100,6 +112,14 @@ func _ready():
 	num_stone_gatherer.visible = false
 	num_farmer.visible = false
 	pass
+
+
+
+#activate time to pay food
+func time_to_pay_food():
+	time_to_pay_food = true
+	auto_pay_food()
+
 
 
 #activate wood auto gather
@@ -208,6 +228,7 @@ func _on_gather_food_input_event(viewport, event, shape_idx):
 			food += 1
 			num_food.text = str("food: ", food)
 	
+	auto_pay_food()
 	pass # Replace with function body.
 
 
@@ -350,3 +371,32 @@ func auto_gather_food():
 
 
 
+#automatically subtruct 10 food per hut every 2.5 min
+func auto_pay_food():
+	if hut > 0:
+		if time_to_pay_food == true:
+			time_to_pay_food = false
+			food_pay_timer.start()
+			if food >= (10*hut):
+				food -= (10*hut)
+				num_food.text = str("food: ",food)
+			elif food < (10*hut):
+				pop -= 1
+				num_pop.text = str("population: ",pop)
+			elif pop == 0:
+				randomize()
+				var random_num = randi() % 16
+				print(random_num)
+				
+				if random_num <= 5:
+					lumberjack -= 1
+					num_lumberjack.text = str("lumberjack: ",lumberjack)
+				
+				elif random_num > 5 and random_num <= 10:
+					stone_gatherer -= 1
+					num_stone_gatherer.text = str("stone gatherer: ", stone_gatherer)
+				
+				elif random_num > 10:
+					farmer -= 1
+					num_farmer.text = str("farmer: ", farmer)
+		
