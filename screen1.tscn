@@ -1,14 +1,6 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://test.gd" type="Script" id=1]
-[ext_resource path="res://wood.gd" type="Script" id=2]
-[ext_resource path="res://stone.gd" type="Script" id=3]
-[ext_resource path="res://nstone.gd" type="Script" id=4]
-[ext_resource path="res://build_hut.gd" type="Script" id=5]
-[ext_resource path="res://nhut.gd" type="Script" id=6]
-[ext_resource path="res://npopulation.gd" type="Script" id=7]
-[ext_resource path="res://gather_food.gd" type="Script" id=8]
-[ext_resource path="res://nfood.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 80.514, 18.2116 )
@@ -35,7 +27,6 @@ script = ExtResource( 1 )
 [node name="gather_wood" type="Area2D" parent="."]
 editor/display_folded = true
 position = Vector2( 100, 33.2387 )
-script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -62,7 +53,6 @@ text = "wood: 0"
 [node name="gather_stone" type="Area2D" parent="."]
 editor/display_folded = true
 position = Vector2( 102.757, 80 )
-script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -86,12 +76,10 @@ margin_right = 542.545
 margin_bottom = 78.9649
 rect_scale = Vector2( 2, 2 )
 text = "stone: 0"
-script = ExtResource( 4 )
 
 [node name="build_hut" type="Area2D" parent="."]
 editor/display_folded = true
 position = Vector2( 70, 120 )
-script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -115,7 +103,6 @@ margin_right = 542.545
 margin_bottom = 124.965
 rect_scale = Vector2( 2, 2 )
 text = "hut: 0"
-script = ExtResource( 6 )
 
 [node name="npopulation" type="RichTextLabel" parent="."]
 margin_left = 427.0
@@ -124,12 +111,10 @@ margin_right = 548.0
 margin_bottom = 164.0
 rect_scale = Vector2( 2, 2 )
 text = "population : 0"
-script = ExtResource( 7 )
 
 [node name="gather_food" type="Area2D" parent="."]
 editor/display_folded = true
 position = Vector2( 92.0032, 152.556 )
-script = ExtResource( 8 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -153,7 +138,6 @@ margin_right = 539.545
 margin_bottom = 208.965
 rect_scale = Vector2( 2, 2 )
 text = "food: 0"
-script = ExtResource( 9 )
 
 [node name="lumberjack+" type="Area2D" parent="."]
 editor/display_folded = true

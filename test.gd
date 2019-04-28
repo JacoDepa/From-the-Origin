@@ -26,6 +26,15 @@ onready var gather_stone = get_node("gather_stone")
 onready var build_hut = get_node("build_hut")
 onready var gather_food = get_node("gather_food")
 
+#RichTextLabels
+onready var num_wood = get_node("nwood")
+onready var num_stone = get_node("nstone")
+onready var num_hut = get_node("nhut")
+onready var num_pop = get_node("npopulation")
+onready var num_food = get_node("nfood")
+onready var num_lumberjack = get_node("nlumberjack")
+onready var num_stone_gatherer = get_node("nstone_gatherer")
+onready var num_farmer = get_node("nfarmer")
 
 #lumberjack
 onready var lumberjack_plus = get_node("lumberjack+")
@@ -82,6 +91,14 @@ func _ready():
 	gather_food.visible = false
 	build_hut.visible = false
 	
+	#makes RichTextLabels non visibles
+	num_stone.visible = false
+	num_hut.visible = false
+	num_pop.visible = false
+	num_food.visible = false
+	num_lumberjack.visible = false
+	num_stone_gatherer.visible = false
+	num_farmer.visible = false
 	pass
 
 
@@ -113,11 +130,15 @@ func _on_gather_wood_input_event(viewport, event, shape_idx):
 	if event is InputEvent:
 		if event.is_pressed():
 			wood += 1
-			get_node("nwood").text = str("wood: ", wood)
+			num_wood.text = str("wood: ", wood)
 	
-	#make "gather_stone" visible when wood >= 20
+	#make buttons visible when wood >= 20
 	if wood >= 20:
 		gather_stone.visible = true
+		build_hut.visible = true
+		num_stone.visible = true
+		num_pop.visible = true
+		num_hut.visible = true
 	pass # Replace with function body.
 
 
@@ -128,7 +149,7 @@ func _on_gather_stone_input_event(viewport, event, shape_idx):
 	if event is InputEvent:
 		if event.is_pressed():
 			stone += 1
-			get_node("nstone").text = str("stone: ", stone)
+			num_stone.text = str("stone: ", stone)
 	
 	pass # Replace with function body.
 
@@ -144,15 +165,15 @@ func _on_build_hut_input_event(viewport, event, shape_idx):
 				pop += 4
 				wood -= nwood
 				flag = 1
-				get_node("nhut").text = str("hut: ", hut)
-				get_node("npopulation").text = str("population: ", pop)
-				get_node("nwood").text = str("wood: ", wood)
+				num_hut.text = str("hut: ", hut)
+				num_pop.text = str("population: ", pop)
+				num_wood.text = str("wood: ", wood)
 	
 	if hut >= 1 and flag == 1:
 		#augment wood neccessary to build hut
 		flag = 0
 		nwood += 50
-		get_node("/root/Node/build_hut/Label").text = str("build hut (",nwood," wood)")
+		get_node("build_hut/Label").text = str("build hut (",nwood," wood)")
 		
 	if hut > 0:
 		#makes works and workers num visible
@@ -168,7 +189,12 @@ func _on_build_hut_input_event(viewport, event, shape_idx):
 		
 		#makes buttons visibles
 		gather_food.visible = true
-		build_hut.visible = true
+		
+		#makes RichTextLabel visible
+		num_food.visible = true
+		num_lumberjack.visible = true
+		num_stone_gatherer.visible = true
+		num_farmer.visible = true
 	
 	pass # Replace with function body.
 
@@ -180,7 +206,7 @@ func _on_gather_food_input_event(viewport, event, shape_idx):
 	if event is InputEvent:
 		if event.is_pressed():
 			food += 1
-			get_node("nfood").text = str("food: ", food)
+			num_food.text = str("food: ", food)
 	
 	pass # Replace with function body.
 
@@ -194,8 +220,8 @@ func _on_lumberjack_input_event(viewport, event, shape_idx):
 			if pop > 0:
 				lumberjack += 1
 				pop -= 1
-				get_node("nlumberjack").text = str("lumberjack: ",lumberjack)
-				get_node("npopulation").text = str("population: ", pop)
+				num_lumberjack.text = str("lumberjack: ",lumberjack)
+				num_pop.text = str("population: ", pop)
 		
 		auto_gather_wood()
 	pass # Replace with function body.
@@ -210,8 +236,8 @@ func _on_lumberjack_min_input_event(viewport, event, shape_idx):
 			if lumberjack > 0:
 				lumberjack -= 1
 				pop += 1
-				get_node("nlumberjack").text = str("lumberjack: ",lumberjack)
-				get_node("npopulation").text = str("population: ", pop)
+				num_lumberjack.text = str("lumberjack: ",lumberjack)
+				num_pop.text = str("population: ", pop)
 	pass # Replace with function body.
 
 
@@ -224,8 +250,8 @@ func _on_stone_gatherer_input_event(viewport, event, shape_idx):
 			if pop > 0:
 				stone_gatherer += 1
 				pop -= 1
-				get_node("nstone_gatherer").text = str("stone gatherer: ",stone_gatherer)
-				get_node("npopulation").text = str("population: ", pop)
+				num_stone_gatherer.text = str("stone gatherer: ",stone_gatherer)
+				num_pop.text = str("population: ", pop)
 		auto_gather_stone()
 	pass # Replace with function body.
 
@@ -239,8 +265,8 @@ func _on_stone_gatherer_min_input_event(viewport, event, shape_idx):
 			if stone_gatherer > 0:
 				stone_gatherer -= 1
 				pop += 1
-				get_node("nstone_gatherer").text = str("stone gatherer: ",stone_gatherer)
-				get_node("npopulation").text = str("population: ", pop)
+				num_stone_gatherer.text = str("stone gatherer: ",stone_gatherer)
+				num_pop.text = str("population: ", pop)
 	pass # Replace with function body.
 
 
@@ -253,8 +279,8 @@ func _on_farmer_input_event(viewport, event, shape_idx):
 			if pop > 0:
 				farmer += 1
 				pop -= 1
-				get_node("nfarmer").text = str("farmer: ",farmer)
-				get_node("npopulation").text = str("population: ", pop)
+				num_farmer.text = str("farmer: ",farmer)
+				num_pop.text = str("population: ", pop)
 		auto_gather_food()
 	pass # Replace with function body.
 
@@ -268,8 +294,8 @@ func _on_farmer_min_input_event(viewport, event, shape_idx):
 			if farmer > 0:
 				farmer -= 1
 				pop += 1
-				get_node("nfarmer").text = str("farmer: ",farmer)
-				get_node("npopulation").text = str("population: ", pop)
+				num_farmer.text = str("farmer: ",farmer)
+				num_pop.text = str("population: ", pop)
 	pass # Replace with function body.
 
 
@@ -282,7 +308,7 @@ func auto_gather_wood():
 			wood += (2*lumberjack)
 			can_gather_wood = false
 			timerWood.start()
-			get_node("nwood").text = str("wood: ", wood)
+			num_wood.text = str("wood: ", wood)
 		else:
 			pass
 	else:
@@ -299,7 +325,7 @@ func auto_gather_stone():
 			stone += (2*stone_gatherer)
 			can_gather_stone = false
 			timerStone.start()
-			get_node("nstone").text = str("stone: ", stone)
+			num_stone.text = str("stone: ", stone)
 		else:
 			pass
 	else:
@@ -316,7 +342,7 @@ func auto_gather_food():
 			food += (2*farmer)
 			can_gather_food = false
 			timerFood.start()
-			get_node("nfood").text = str("food: ", food)
+			num_food.text = str("food: ", food)
 		else:
 			pass
 	else:
