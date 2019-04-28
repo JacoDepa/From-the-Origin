@@ -21,7 +21,7 @@ func _on_gather_wood_input_event(viewport, event, shape_idx):
 		pass
 	pass # Replace with function body.
 
-
+"""
 func _on_build_hut_input_event(viewport, event, shape_idx):
 	if wood >= nwood:
 		if event is InputEvent:
@@ -45,4 +45,4 @@ func _on_build_hut_input_event(viewport, event, shape_idx):
 	
 	
 	pass # Replace with function body.
-	
+	"""
