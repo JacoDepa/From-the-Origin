@@ -138,10 +138,10 @@ rect_scale = Vector2( 2, 2 )
 text = "gather food"
 
 [node name="nfood" type="RichTextLabel" parent="."]
-margin_left = 305.064
-margin_top = 188.257
-margin_right = 418.064
-margin_bottom = 210.257
+margin_left = 303.772
+margin_top = 184.38
+margin_right = 416.772
+margin_bottom = 206.38
 rect_scale = Vector2( 2, 2 )
 text = "food: 0"
 
