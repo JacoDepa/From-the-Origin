@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://test.gd" type="Script" id=1]
 
@@ -21,8 +21,14 @@ extents = Vector2( 14.7215, 10 )
 
 [sub_resource type="RectangleShape2D" id=7]
 
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 143.254, 31.6895 )
+
 [node name="Node" type="Node"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ -24.7378 ]
+}
 
 [node name="gather_wood" type="Area2D" parent="."]
 editor/display_folded = true
@@ -43,10 +49,10 @@ rect_scale = Vector2( 2, 2 )
 text = "gather wood"
 
 [node name="nwood" type="RichTextLabel" parent="."]
-margin_left = 425.455
-margin_top = 16.5262
-margin_right = 539.455
-margin_bottom = 34.5262
+margin_left = 303.974
+margin_top = 17.8185
+margin_right = 417.974
+margin_bottom = 35.8185
 rect_scale = Vector2( 2, 2 )
 text = "wood: 0"
 
@@ -70,10 +76,10 @@ position = Vector2( -1.62903, 0 )
 shape = SubResource( 2 )
 
 [node name="nstone" type="RichTextLabel" parent="."]
-margin_left = 426.545
-margin_top = 61.9649
-margin_right = 542.545
-margin_bottom = 78.9649
+margin_left = 305.064
+margin_top = 63.2572
+margin_right = 421.064
+margin_bottom = 80.2572
 rect_scale = Vector2( 2, 2 )
 text = "stone: 0"
 
@@ -97,18 +103,18 @@ rect_scale = Vector2( 2, 2 )
 text = "build hut (50 wood)"
 
 [node name="nhut" type="RichTextLabel" parent="."]
-margin_left = 426.545
-margin_top = 104.965
-margin_right = 542.545
-margin_bottom = 124.965
+margin_left = 305.064
+margin_top = 106.257
+margin_right = 421.064
+margin_bottom = 126.257
 rect_scale = Vector2( 2, 2 )
 text = "hut: 0"
 
 [node name="npopulation" type="RichTextLabel" parent="."]
-margin_left = 427.0
-margin_top = 145.0
-margin_right = 548.0
-margin_bottom = 164.0
+margin_left = 305.519
+margin_top = 146.292
+margin_right = 426.519
+margin_bottom = 165.292
 rect_scale = Vector2( 2, 2 )
 text = "population : 0"
 
@@ -132,16 +138,16 @@ rect_scale = Vector2( 2, 2 )
 text = "gather food"
 
 [node name="nfood" type="RichTextLabel" parent="."]
-margin_left = 426.545
-margin_top = 186.965
-margin_right = 539.545
-margin_bottom = 208.965
+margin_left = 305.064
+margin_top = 188.257
+margin_right = 418.064
+margin_bottom = 210.257
 rect_scale = Vector2( 2, 2 )
 text = "food: 0"
 
 [node name="lumberjack+" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 961.021, 29.4136 )
+position = Vector2( 734.86, 30.706 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -160,7 +166,7 @@ text = "+ /"
 
 [node name="lumberjack-" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 1001.43, 30.0024 )
+position = Vector2( 775.269, 31.2948 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -177,16 +183,16 @@ rect_scale = Vector2( 2, 2 )
 text = "_"
 
 [node name="nlumberjack" type="Label" parent="."]
-margin_left = 735.119
-margin_top = 17.6227
-margin_right = 822.119
-margin_bottom = 31.6227
+margin_left = 508.958
+margin_top = 18.9151
+margin_right = 595.958
+margin_bottom = 32.9151
 rect_scale = Vector2( 2, 2 )
 text = "lumberjack: 0"
 
 [node name="stone_gatherer+" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 969.183, 70.2245 )
+position = Vector2( 743.022, 71.5169 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -205,7 +211,7 @@ text = "+ /"
 
 [node name="stone_gatherer-" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 1009.12, 70.0618 )
+position = Vector2( 782.959, 71.3542 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -222,16 +228,16 @@ rect_scale = Vector2( 2, 2 )
 text = "_"
 
 [node name="nstone_gatherer" type="Label" parent="."]
-margin_left = 733.759
-margin_top = 59.794
-margin_right = 842.759
-margin_bottom = 73.794
+margin_left = 507.598
+margin_top = 61.0864
+margin_right = 616.598
+margin_bottom = 75.0864
 rect_scale = Vector2( 2, 2 )
 text = "stone gatherer: 0"
 
 [node name="farmer+" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 889.697, 117.46 )
+position = Vector2( 663.536, 118.752 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -249,7 +255,7 @@ text = "+ /"
 
 [node name="farmer-" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 932.346, 117.878 )
+position = Vector2( 706.185, 119.17 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -266,12 +272,32 @@ rect_scale = Vector2( 2, 2 )
 text = "_"
 
 [node name="nfarmer" type="RichTextLabel" parent="."]
-margin_left = 734.746
-margin_top = 105.073
-margin_right = 801.746
-margin_bottom = 123.073
+margin_left = 508.585
+margin_top = 106.365
+margin_right = 575.585
+margin_bottom = 124.365
 rect_scale = Vector2( 2, 2 )
 text = "farmer: 0"
+
+[node name="constructionLab" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 125.386, 216.274 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="constructionLab"]
+position = Vector2( 29.1903, 0.663391 )
+shape = SubResource( 8 )
+
+[node name="Label" type="Label" parent="constructionLab"]
+margin_left = -109.464
+margin_top = -27.8635
+margin_right = 28.5363
+margin_bottom = 3.13651
+rect_scale = Vector2( 2, 2 )
+text = "Construction Lab
+(500 wood, 150 stone)"
 
 [connection signal="input_event" from="gather_wood" to="." method="_on_gather_wood_input_event"]
 [connection signal="input_event" from="gather_stone" to="." method="_on_gather_stone_input_event"]
@@ -285,3 +311,4 @@ text = "farmer: 0"
 [connection signal="input_event" from="stone_gatherer-" to="." method="_on_stone_gatherer_min_input_event"]
 [connection signal="input_event" from="farmer+" to="." method="_on_farmer_input_event"]
 [connection signal="input_event" from="farmer-" to="." method="_on_farmer_min_input_event"]
+[connection signal="input_event" from="constructionLab" to="." method="_on_constructionLab_input_event"]

@@ -21,10 +21,12 @@ onready var can_gather_wood = true
 onready var can_gather_stone = true
 onready var can_gather_food = true
 
+"""
 #food timer
 onready var food_pay_timer = null
-onready var food_pay_delay = 2500
+onready var food_pay_delay = 10
 onready var time_to_pay_food = true
+"""
 
 #Buttons
 onready var gather_stone = get_node("gather_stone")
@@ -56,6 +58,8 @@ onready var farmer_plus = get_node("farmer+")
 onready var farmer_min = get_node("farmer-")
 onready var nfarmer = get_node("nfarmer")
 
+#Buildings
+onready var construction_lab = get_node("constructionLab")
 
 func _ready():
 	
@@ -80,12 +84,14 @@ func _ready():
 	timerFood.connect("timeout", self, "on_timeout_complete_food")
 	add_child(timerFood)
 	
+	"""
 	#time to pay food timer
 	food_pay_timer = Timer.new()
 	food_pay_timer.set_one_shot(true)
 	food_pay_timer.set_wait_time(food_pay_delay)
 	food_pay_timer.connect("time_to_pay_food", self, "time_to_pay_food")
 	add_child(food_pay_timer)
+	"""
 	
 	#makes works and workes num non visible
 	lumberjack_plus.visible = false
@@ -111,15 +117,20 @@ func _ready():
 	num_lumberjack.visible = false
 	num_stone_gatherer.visible = false
 	num_farmer.visible = false
+	
+	#makes buildings non visible
+	construction_lab.visible = false
+	
+	
 	pass
 
 
-
+"""
 #activate time to pay food
 func time_to_pay_food():
 	time_to_pay_food = true
 	auto_pay_food()
-
+"""
 
 
 #activate wood auto gather
@@ -155,10 +166,16 @@ func _on_gather_wood_input_event(viewport, event, shape_idx):
 	#make buttons visible when wood >= 20
 	if wood >= 20:
 		gather_stone.visible = true
-		build_hut.visible = true
 		num_stone.visible = true
+	if wood >= 50:
+		build_hut.visible = true
 		num_pop.visible = true
 		num_hut.visible = true
+	
+	#makes buildings visible
+	if stone >= 75 and wood >= 150:
+		construction_lab.visible = true
+		
 	pass # Replace with function body.
 
 
@@ -170,6 +187,10 @@ func _on_gather_stone_input_event(viewport, event, shape_idx):
 		if event.is_pressed():
 			stone += 1
 			num_stone.text = str("stone: ", stone)
+	
+	#makes buildings visible
+	if stone >= 75 and wood >= 150:
+		construction_lab.visible = true
 	
 	pass # Replace with function body.
 
@@ -228,7 +249,11 @@ func _on_gather_food_input_event(viewport, event, shape_idx):
 			food += 1
 			num_food.text = str("food: ", food)
 	
-	auto_pay_food()
+	#makes buildings visible
+	if stone >= 75 and wood >= 150:
+		construction_lab.visible = true
+	
+	#auto_pay_food()
 	pass # Replace with function body.
 
 
@@ -371,6 +396,7 @@ func auto_gather_food():
 
 
 
+"""
 #automatically subtruct 10 food per hut every 2.5 min
 func auto_pay_food():
 	if hut > 0:
@@ -399,4 +425,27 @@ func auto_pay_food():
 				elif random_num > 10:
 					farmer -= 1
 					num_farmer.text = str("farmer: ", farmer)
-		
+					
+				else:
+					pass
+			else:
+				pass
+		else:
+			pass
+	else:
+		pass
+"""
+
+func _on_constructionLab_input_event(viewport, event, shape_idx):
+	#unlock constructio lab
+	if event is InputEvent:
+		if event.is_pressed():
+			if wood >= 500 and stone >= 150:
+				wood -= 500
+				num_wood.text = str("wood: ", wood)
+				stone -= 150
+				num_stone.text = str("stone: ", stone)
+				get_node("constructionLab/Label").text = str("Construction Lab")
+	
+	
+	pass # Replace with function body.
