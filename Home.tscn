@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://test.gd" type="Script" id=1]
 
@@ -23,6 +23,12 @@ extents = Vector2( 14.7215, 10 )
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 143.254, 31.6895 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 193.695, 17.2616 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 15.2433, 10 )
 
 [node name="Node" type="Node"]
 script = ExtResource( 1 )
@@ -299,6 +305,45 @@ rect_scale = Vector2( 2, 2 )
 text = "Construction Lab
 (500 wood, 150 stone)"
 
+[node name="buy_pickaxe" type="Area2D" parent="."]
+editor/display_folded = true
+visible = false
+position = Vector2( 181.289, 27.0683 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="buy_pickaxe"]
+position = Vector2( 21.5195, 3.08321 )
+shape = SubResource( 9 )
+
+[node name="Label" type="Label" parent="buy_pickaxe"]
+margin_left = -165.343
+margin_top = -12.5369
+margin_right = 20.6566
+margin_bottom = 1.46313
+rect_scale = Vector2( 2, 2 )
+text = "pickaxe (150 wood, 60 stone)"
+
+[node name="exit_constr_lab" type="Area2D" parent="."]
+editor/display_folded = true
+visible = false
+position = Vector2( 1005.98, 14.6341 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit_constr_lab"]
+position = Vector2( -1.67247, 0 )
+shape = SubResource( 10 )
+
+[node name="Label" type="Label" parent="exit_constr_lab"]
+margin_left = -15.0522
+margin_top = -6.27177
+margin_right = 24.9478
+margin_bottom = 7.72823
+text = "EXIT"
+
 [connection signal="input_event" from="gather_wood" to="." method="_on_gather_wood_input_event"]
 [connection signal="input_event" from="gather_stone" to="." method="_on_gather_stone_input_event"]
 [connection signal="input_event" from="build_hut" to="build_hut" method="_on_build_hut_input_event"]
@@ -312,3 +357,5 @@ text = "Construction Lab
 [connection signal="input_event" from="farmer+" to="." method="_on_farmer_input_event"]
 [connection signal="input_event" from="farmer-" to="." method="_on_farmer_min_input_event"]
 [connection signal="input_event" from="constructionLab" to="." method="_on_constructionLab_input_event"]
+[connection signal="input_event" from="buy_pickaxe" to="." method="_on_buy_pickaxe_input_event"]
+[connection signal="input_event" from="exit_constr_lab" to="." method="_on_exit_constr_lab_input_event"]

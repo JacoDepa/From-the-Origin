@@ -29,9 +29,11 @@ onready var time_to_pay_food = true
 """
 
 #Buttons
+onready var gather_wood = get_node("gather_wood")
 onready var gather_stone = get_node("gather_stone")
 onready var build_hut = get_node("build_hut")
 onready var gather_food = get_node("gather_food")
+onready var exit_constr_lab = get_node("exit_constr_lab")
 
 #RichTextLabels
 onready var num_wood = get_node("nwood")
@@ -61,6 +63,8 @@ onready var nfarmer = get_node("nfarmer")
 #Buildings
 onready var construction_lab = get_node("constructionLab")
 
+#items
+onready var pickaxe = get_node("buy_pickaxe")
 func _ready():
 	
 	#auto gather wood timer
@@ -437,6 +441,7 @@ func auto_pay_food():
 """
 
 func _on_constructionLab_input_event(viewport, event, shape_idx):
+	
 	#unlock constructio lab
 	if event is InputEvent:
 		if event.is_pressed():
@@ -446,6 +451,72 @@ func _on_constructionLab_input_event(viewport, event, shape_idx):
 				stone -= 150
 				num_stone.text = str("stone: ", stone)
 				get_node("constructionLab/Label").text = str("Construction Lab")
+				
 	
+	#get to the lab
+	if get_node("constructionLab/Label").text == str("Construction Lab"):
+		if event is InputEvent:
+			if event.is_pressed():
+				gather_food.visible = false
+				gather_stone.visible = false
+				gather_wood.visible = false
+				build_hut.visible = false
+				num_farmer.visible = false
+				num_food.visible = false
+				num_hut.visible = false
+				num_lumberjack.visible = false
+				num_pop.visible = false
+				num_stone.visible = false
+				num_stone_gatherer.visible = false
+				num_wood.visible = false
+				lumberjack_plus.visible = false
+				lumbrjack_min.visible = false
+				stone_gatherer_min.visible = false
+				stone_gatherer_plus.visible = false
+				nlumberjack.visible = false
+				nstone_gatherer.visible = false
+				farmer_min.visible = false
+				farmer_plus.visible = false
+				construction_lab.visible = false
+				pickaxe.visible = true
+				exit_constr_lab.visible = true
 	
+	pass # Replace with function body.
+
+
+func _on_buy_pickaxe_input_event(viewport, event, shape_idx):
+	#buy pickaxe
+	if wood >= 150 and stone >= 60:
+		if event is InputEvent:
+			if event.is_pressed():
+				get_node("buy_pickaxe/Label").text = str("pickaxe (bought)")
+	pass # Replace with function body.
+
+
+func _on_exit_constr_lab_input_event(viewport, event, shape_idx):
+	if event is InputEvent:
+		if event.is_pressed():
+			gather_food.visible = true
+			gather_stone.visible = true
+			gather_wood.visible = true
+			build_hut.visible = true
+			num_farmer.visible = true
+			num_food.visible = true
+			num_hut.visible = true
+			num_lumberjack.visible = true
+			num_pop.visible = true
+			num_stone.visible = true
+			num_stone_gatherer.visible = true
+			num_wood.visible = true
+			lumberjack_plus.visible = true
+			lumbrjack_min.visible = true
+			stone_gatherer_min.visible = true
+			stone_gatherer_plus.visible = true
+			nlumberjack.visible = true
+			nstone_gatherer.visible = true
+			farmer_min.visible = true
+			farmer_plus.visible = true
+			construction_lab.visible = true
+			pickaxe.visible = false
+			exit_constr_lab.visible = false
 	pass # Replace with function body.
