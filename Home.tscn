@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://test.gd" type="Script" id=1]
 
@@ -29,6 +29,9 @@ extents = Vector2( 193.695, 17.2616 )
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 15.2433, 10 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 163.224, 13.8292 )
 
 [node name="Node" type="Node"]
 script = ExtResource( 1 )
@@ -344,6 +347,46 @@ margin_right = 24.9478
 margin_bottom = 7.72823
 text = "EXIT"
 
+[node name="buy_axe" type="Area2D" parent="."]
+editor/display_folded = true
+visible = false
+position = Vector2( 144.625, 75.6294 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="buy_axe"]
+position = Vector2( 31.844, -1.32683 )
+shape = SubResource( 11 )
+
+[node name="Label" type="Label" parent="buy_axe"]
+margin_left = -129.366
+margin_top = -15.2586
+margin_right = 30.6339
+margin_bottom = -1.25856
+rect_scale = Vector2( 2, 2 )
+text = "axe (150 wood, 70 stone)"
+
+[node name="buy_hoe" type="Area2D" parent="."]
+editor/display_folded = true
+visible = false
+position = Vector2( 144.625, 118.751 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="buy_hoe"]
+position = Vector2( 31.844, -1.32683 )
+shape = SubResource( 11 )
+
+[node name="Label" type="Label" parent="buy_hoe"]
+margin_left = -129.366
+margin_top = -15.2586
+margin_right = 30.6339
+margin_bottom = -1.25856
+rect_scale = Vector2( 2, 2 )
+text = "hoe (130 wood, 70 stone)"
+
 [connection signal="input_event" from="gather_wood" to="." method="_on_gather_wood_input_event"]
 [connection signal="input_event" from="gather_stone" to="." method="_on_gather_stone_input_event"]
 [connection signal="input_event" from="build_hut" to="build_hut" method="_on_build_hut_input_event"]
@@ -359,3 +402,5 @@ text = "EXIT"
 [connection signal="input_event" from="constructionLab" to="." method="_on_constructionLab_input_event"]
 [connection signal="input_event" from="buy_pickaxe" to="." method="_on_buy_pickaxe_input_event"]
 [connection signal="input_event" from="exit_constr_lab" to="." method="_on_exit_constr_lab_input_event"]
+[connection signal="input_event" from="buy_axe" to="." method="_on_buy_axe_input_event"]
+[connection signal="input_event" from="buy_hoe" to="." method="_on_buy_hoe_input_event"]
