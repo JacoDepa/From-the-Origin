@@ -495,7 +495,7 @@ text = "carbon miner: 0"
 
 [node name="iron_miner_plus" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 917.156, 196.215 )
+position = Vector2( 915.796, 208.458 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -513,7 +513,7 @@ text = "+ /"
 
 [node name="iron_miner_min" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 958.968, 196.027 )
+position = Vector2( 957.608, 208.27 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -530,12 +530,52 @@ rect_scale = Vector2( 2, 2 )
 text = "_"
 
 [node name="niron_miner" type="Label" parent="."]
-margin_left = 704.705
-margin_top = 183.932
-margin_right = 794.705
-margin_bottom = 197.932
+margin_left = 703.345
+margin_top = 196.175
+margin_right = 793.345
+margin_bottom = 210.175
 rect_scale = Vector2( 2, 2 )
 text = "steel miner: 0"
+
+[node name="info_lumberjack" type="Label" parent="."]
+visible = false
+margin_left = 706.031
+margin_top = 44.8921
+margin_right = 860.031
+margin_bottom = 58.8921
+text = "+2 wood in 10 sec"
+
+[node name="info_stone_gatherer" type="Label" parent="."]
+visible = false
+margin_left = 702.654
+margin_top = 86.6277
+margin_right = 858.654
+margin_bottom = 100.628
+text = "+2 stone in 10 sec"
+
+[node name="info_farmer" type="Label" parent="."]
+visible = false
+margin_left = 703.095
+margin_top = 133.173
+margin_right = 851.095
+margin_bottom = 147.173
+text = "+2 food in 10 sec"
+
+[node name="info_carbon_miner" type="Label" parent="."]
+visible = false
+margin_left = 705.959
+margin_top = 177.564
+margin_right = 868.959
+margin_bottom = 191.564
+text = "+2 carbon in 40 sec"
+
+[node name="info_iron_miner" type="Label" parent="."]
+visible = false
+margin_left = 707.391
+margin_top = 224.819
+margin_right = 859.391
+margin_bottom = 238.819
+text = "+2 iron in 40 sec"
 
 [connection signal="input_event" from="gather_wood" to="." method="_on_gather_wood_input_event"]
 [connection signal="input_event" from="gather_stone" to="." method="_on_gather_stone_input_event"]
