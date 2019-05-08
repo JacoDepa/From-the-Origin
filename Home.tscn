@@ -164,7 +164,7 @@ text = "food: 0"
 
 [node name="lumberjack+" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 928.175, 29.274 )
+position = Vector2( 931.039, 46.4576 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -183,7 +183,7 @@ text = "+ /"
 
 [node name="lumberjack-" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 968.584, 29.8628 )
+position = Vector2( 971.448, 47.0464 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -200,16 +200,16 @@ rect_scale = Vector2( 2, 2 )
 text = "_"
 
 [node name="nlumberjack" type="Label" parent="."]
-margin_left = 702.273
-margin_top = 17.4831
-margin_right = 789.273
-margin_bottom = 31.4831
+margin_left = 705.137
+margin_top = 34.6667
+margin_right = 792.137
+margin_bottom = 48.6667
 rect_scale = Vector2( 2, 2 )
 text = "lumberjack: 0"
 
 [node name="stone_gatherer+" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 936.337, 70.0849 )
+position = Vector2( 939.201, 87.2685 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -228,7 +228,7 @@ text = "+ /"
 
 [node name="stone_gatherer-" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 976.274, 69.9222 )
+position = Vector2( 979.138, 87.1058 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -245,16 +245,16 @@ rect_scale = Vector2( 2, 2 )
 text = "_"
 
 [node name="nstone_gatherer" type="Label" parent="."]
-margin_left = 700.913
-margin_top = 59.6544
-margin_right = 809.913
-margin_bottom = 73.6544
+margin_left = 703.777
+margin_top = 76.838
+margin_right = 812.777
+margin_bottom = 90.838
 rect_scale = Vector2( 2, 2 )
 text = "stone gatherer: 0"
 
 [node name="farmer+" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 856.851, 117.32 )
+position = Vector2( 859.715, 134.504 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -272,7 +272,7 @@ text = "+ /"
 
 [node name="farmer-" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 899.5, 117.738 )
+position = Vector2( 902.364, 134.922 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -289,10 +289,10 @@ rect_scale = Vector2( 2, 2 )
 text = "_"
 
 [node name="nfarmer" type="RichTextLabel" parent="."]
-margin_left = 701.9
-margin_top = 104.933
-margin_right = 768.9
-margin_bottom = 122.933
+margin_left = 704.764
+margin_top = 122.117
+margin_right = 771.764
+margin_bottom = 140.117
 rect_scale = Vector2( 2, 2 )
 text = "farmer: 0"
 
@@ -451,7 +451,7 @@ text = "iron: 0"
 
 [node name="carbon_miner_plus" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 929.344, 159.65 )
+position = Vector2( 932.208, 176.834 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -469,7 +469,7 @@ text = "+ /"
 
 [node name="carbon_miner_min" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 969.233, 160.758 )
+position = Vector2( 972.097, 177.942 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -486,16 +486,16 @@ text = "_"
 shape = SubResource( 14 )
 
 [node name="ncarbon_miner" type="Label" parent="."]
-margin_left = 702.489
-margin_top = 146.259
-margin_right = 803.489
-margin_bottom = 160.259
+margin_left = 705.353
+margin_top = 163.443
+margin_right = 806.353
+margin_bottom = 177.443
 rect_scale = Vector2( 2, 2 )
 text = "carbon miner: 0"
 
 [node name="iron_miner_plus" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 915.796, 208.458 )
+position = Vector2( 918.66, 225.642 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -513,7 +513,7 @@ text = "+ /"
 
 [node name="iron_miner_min" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 957.608, 208.27 )
+position = Vector2( 960.472, 225.454 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -530,52 +530,60 @@ rect_scale = Vector2( 2, 2 )
 text = "_"
 
 [node name="niron_miner" type="Label" parent="."]
-margin_left = 703.345
-margin_top = 196.175
-margin_right = 793.345
-margin_bottom = 210.175
+margin_left = 706.209
+margin_top = 213.359
+margin_right = 796.209
+margin_bottom = 227.359
 rect_scale = Vector2( 2, 2 )
 text = "steel miner: 0"
 
 [node name="info_lumberjack" type="Label" parent="."]
 visible = false
 margin_left = 706.031
-margin_top = 44.8921
+margin_top = 59.8921
 margin_right = 860.031
-margin_bottom = 58.8921
+margin_bottom = 73.8921
 text = "+2 wood in 10 sec"
 
 [node name="info_stone_gatherer" type="Label" parent="."]
 visible = false
 margin_left = 702.654
-margin_top = 86.6277
+margin_top = 105.628
 margin_right = 858.654
-margin_bottom = 100.628
+margin_bottom = 119.628
 text = "+2 stone in 10 sec"
 
 [node name="info_farmer" type="Label" parent="."]
 visible = false
 margin_left = 703.095
-margin_top = 133.173
+margin_top = 147.173
 margin_right = 851.095
-margin_bottom = 147.173
+margin_bottom = 161.173
 text = "+2 food in 10 sec"
 
 [node name="info_carbon_miner" type="Label" parent="."]
 visible = false
 margin_left = 705.959
-margin_top = 177.564
+margin_top = 188.564
 margin_right = 868.959
-margin_bottom = 191.564
+margin_bottom = 202.564
 text = "+2 carbon in 40 sec"
 
 [node name="info_iron_miner" type="Label" parent="."]
 visible = false
-margin_left = 707.391
-margin_top = 224.819
-margin_right = 859.391
-margin_bottom = 238.819
+margin_left = 706.994
+margin_top = 240.216
+margin_right = 858.994
+margin_bottom = 254.216
 text = "+2 iron in 40 sec"
+
+[node name="need_food" type="Label" parent="."]
+visible = false
+margin_left = 707.391
+margin_top = 8.5918
+margin_right = 882.391
+margin_bottom = 22.5918
+text = "YOU NEED FOOD TO WORK"
 
 [connection signal="input_event" from="gather_wood" to="." method="_on_gather_wood_input_event"]
 [connection signal="input_event" from="gather_stone" to="." method="_on_gather_stone_input_event"]

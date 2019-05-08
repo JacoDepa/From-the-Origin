@@ -4,8 +4,8 @@ extends Node
 onready var hut = 0
 onready var pop = 0
 onready var food = 0
-onready var wood = 20000
-onready var stone = 20000
+onready var wood = 0
+onready var stone = 0
 onready var nwood = 50
 onready var flag = 0
 onready var lumberjack = 0
@@ -99,6 +99,7 @@ onready var info_stone_gatherer = get_node("info_stone_gatherer")
 onready var info_farmer = get_node("info_farmer")
 onready var info_carbon_miner = get_node("info_carbon_miner")
 onready var info_iron_miner = get_node("info_iron_miner")
+onready var need_food = get_node("need_food")
 
 func _ready():
 	
@@ -305,6 +306,7 @@ func _on_build_hut_input_event(viewport, event, shape_idx):
 		farmer_plus.visible = true
 		farmer_min.visible = true
 		nfarmer.visible = true
+		need_food.visible = true
 		
 		#makes buttons visibles
 		gather_food.visible = true
@@ -428,10 +430,10 @@ func _on_farmer_input_event(viewport, event, shape_idx):
 				num_pop.text = str("population: ", pop)
 				info_farmer.visible = true
 		if get_node("buy_hoe/Label").text == str("hoe (130 wood, 70 stone)"):
-			info_farmer.text = str("+", (2 * farmer), " food in 10 sec each")
+			info_farmer.text = str("+", (2 * farmer), " food in 10 sec")
 		
 		elif get_node("buy_hoe/Label").text == str("hoe (bought)"):
-			info_farmer.text = str("+", (3 * farmer), " food in 10 sec each")
+			info_farmer.text = str("+", (3 * farmer), " food in 10 sec")
 		
 		auto_gather_food()
 		
@@ -450,10 +452,10 @@ func _on_farmer_min_input_event(viewport, event, shape_idx):
 				num_farmer.text = str("farmer: ",farmer)
 				num_pop.text = str("population: ", pop)
 				if get_node("buy_hoe/Label").text == str("hoe (130 wood, 70 stone)"):
-					info_farmer.text = str("+", (2 * farmer), " food in 10 sec each")
+					info_farmer.text = str("+", (2 * farmer), " food in 10 sec")
 		
 				elif get_node("buy_hoe/Label").text == str("hoe (bought)"):
-					info_farmer.text = str("+", (3 * farmer), " food in 10 sec each")
+					info_farmer.text = str("+", (3 * farmer), " food in 10 sec")
 				
 	if farmer == 0:
 		info_farmer.visible = false
@@ -464,60 +466,68 @@ func _on_farmer_min_input_event(viewport, event, shape_idx):
 #auto gather 2 wood per lumberjack every 10 sec
 func auto_gather_wood():
 	#auto gather 2 wood per lumberjack every 10 sec
-	if lumberjack >= 1:
-		if can_gather_wood == true and get_node("buy_axe/Label").text == str("axe (150 wood, 70 stone)"):
-			wood += (2*lumberjack)
-			can_gather_wood = false
-			timerWood.start()
-			num_wood.text = str("wood: ", wood)
-		elif can_gather_wood == true and get_node("buy_axe/Label").text == str("axe (bought)"):
-			wood += (3*lumberjack)
-			can_gather_wood = false
-			timerWood.start()
-			num_wood.text = str("wood: ", wood)
-			
-			
+	if food > 0:
+		if lumberjack >= 1:
+			if can_gather_wood == true and get_node("buy_axe/Label").text == str("axe (150 wood, 70 stone)"):
+				wood += (2*lumberjack)
+				can_gather_wood = false
+				timerWood.start()
+				num_wood.text = str("wood: ", wood)
+			elif can_gather_wood == true and get_node("buy_axe/Label").text == str("axe (bought)"):
+				wood += (3*lumberjack)
+				can_gather_wood = false
+				timerWood.start()
+				num_wood.text = str("wood: ", wood)
+				
+				
+			else:
+				pass
 		else:
 			pass
 	else:
 		pass
-		
 
 
 
 #auto gather 2 stone per stone gatherer every 10 sec
 func auto_gather_stone():
 	#auto gather 2 stone per stone gatherer every 10 sec
-	if stone_gatherer >= 1:
-		if can_gather_stone == true:
-			stone += (2*stone_gatherer)
-			can_gather_stone = false
-			timerStone.start()
-			num_stone.text = str("stone: ", stone)
+	
+	if food > 0:
+		if stone_gatherer >= 1:
+			if can_gather_stone == true:
+				stone += (2*stone_gatherer)
+				can_gather_stone = false
+				timerStone.start()
+				num_stone.text = str("stone: ", stone)
+			else:
+				pass
 		else:
 			pass
 	else:
 		pass
-		
 
 
 
 #auto gather 2 food per farmer every 10 sec
 func auto_gather_food():
 	#auto gather 2 food per farmer every 10 sec
-	if farmer > 0:
-		if can_gather_food == true and get_node("buy_hoe/Label").text == str("hoe (130 wood, 70 stone)"):
-			food += (2*farmer)
-			can_gather_food = false
-			timerFood.start()
-			num_food.text = str("food: ", food)
-		elif can_gather_food == true and get_node("buy_hoe/Label").text == str("hoe (bought)"):
-			food += (3*farmer)
-			can_gather_food = false
-			timerFood.start()
-			num_food.text = str("food: ", food)
-			
-			
+	if food > 0:
+		if farmer > 0:
+			if can_gather_food == true and get_node("buy_hoe/Label").text == str("hoe (130 wood, 70 stone)"):
+				food += (2*farmer)
+				can_gather_food = false
+				timerFood.start()
+				num_food.text = str("food: ", food)
+			elif can_gather_food == true and get_node("buy_hoe/Label").text == str("hoe (bought)"):
+				food += (3*farmer)
+				can_gather_food = false
+				timerFood.start()
+				num_food.text = str("food: ", food)
+				
+				
+			else:
+				pass
 		else:
 			pass
 	else:
@@ -527,13 +537,16 @@ func auto_gather_food():
 
 #auto gather 2 carbon every 40 sec per carbon_miner
 func auto_gather_carbon():
-	if carbon_miner > 0:
-		if can_gather_carbon == true:
-			carbon += (2 * carbon_miner)
-			can_gather_carbon = false
-			timerCarbon.start()
-			num_carbon.text = str("carbon: ", carbon)
-		
+	if food > 0:
+		if carbon_miner > 0:
+			if can_gather_carbon == true:
+				carbon += (2 * carbon_miner)
+				can_gather_carbon = false
+				timerCarbon.start()
+				num_carbon.text = str("carbon: ", carbon)
+			
+			else:
+				pass
 		else:
 			pass
 	else:
@@ -543,12 +556,15 @@ func auto_gather_carbon():
 
 #auto gather 2 iron every 40 sec per iron miner
 func auto_gather_iron():
-	if iron_miner > 0:
-		if can_gather_iron == true:
-			iron += (2 * iron_miner)
-			can_gather_iron = false
-			timerIron.start()
-			num_iron.text = str("iron: ", iron)
+	if food > 0:
+		if iron_miner > 0:
+			if can_gather_iron == true:
+				iron += (2 * iron_miner)
+				can_gather_iron = false
+				timerIron.start()
+				num_iron.text = str("iron: ", iron)
+			else:
+				pass
 		else:
 			pass
 	else:
@@ -648,6 +664,7 @@ func _on_constructionLab_input_event(viewport, event, shape_idx):
 				info_iron_miner.visible = false
 				info_lumberjack.visible = false
 				info_stone_gatherer.visible = false
+				need_food.visible = false
 				
 				#makes items and exit visible
 				pickaxe.visible = true
@@ -700,6 +717,7 @@ func _on_exit_constr_lab_input_event(viewport, event, shape_idx):
 			info_farmer.visible = true
 			info_lumberjack.visible = true
 			info_stone_gatherer.visible = true
+			need_food.visible = false
 			
 			#mines
 			if get_node("buy_pickaxe/Label").text == str("pickaxe (bought)"):
