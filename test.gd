@@ -470,11 +470,15 @@ func auto_gather_wood():
 		if lumberjack >= 1:
 			if can_gather_wood == true and get_node("buy_axe/Label").text == str("axe (150 wood, 70 stone)"):
 				wood += (2*lumberjack)
+				food -= lumberjack
+				num_food.text = str("food: ", food)
 				can_gather_wood = false
 				timerWood.start()
 				num_wood.text = str("wood: ", wood)
 			elif can_gather_wood == true and get_node("buy_axe/Label").text == str("axe (bought)"):
 				wood += (3*lumberjack)
+				food -= lumberjack
+				num_food.text = str("food: ", food)
 				can_gather_wood = false
 				timerWood.start()
 				num_wood.text = str("wood: ", wood)
@@ -497,6 +501,8 @@ func auto_gather_stone():
 		if stone_gatherer >= 1:
 			if can_gather_stone == true:
 				stone += (2*stone_gatherer)
+				food -= stone_gatherer
+				num_food.text = str("food: ", food)
 				can_gather_stone = false
 				timerStone.start()
 				num_stone.text = str("stone: ", stone)
@@ -516,11 +522,15 @@ func auto_gather_food():
 		if farmer > 0:
 			if can_gather_food == true and get_node("buy_hoe/Label").text == str("hoe (130 wood, 70 stone)"):
 				food += (2*farmer)
+				food -= farmer
+				num_food.text = str("food: ", food)
 				can_gather_food = false
 				timerFood.start()
 				num_food.text = str("food: ", food)
 			elif can_gather_food == true and get_node("buy_hoe/Label").text == str("hoe (bought)"):
 				food += (3*farmer)
+				food -= farmer
+				num_food.text = str("food: ", food)
 				can_gather_food = false
 				timerFood.start()
 				num_food.text = str("food: ", food)
@@ -541,6 +551,8 @@ func auto_gather_carbon():
 		if carbon_miner > 0:
 			if can_gather_carbon == true:
 				carbon += (2 * carbon_miner)
+				food -= carbon_miner
+				num_food.text = str("food: ", food)
 				can_gather_carbon = false
 				timerCarbon.start()
 				num_carbon.text = str("carbon: ", carbon)
@@ -560,6 +572,8 @@ func auto_gather_iron():
 		if iron_miner > 0:
 			if can_gather_iron == true:
 				iron += (2 * iron_miner)
+				food -= iron_miner
+				num_food.text = str("food: ", food)
 				can_gather_iron = false
 				timerIron.start()
 				num_iron.text = str("iron: ", iron)
