@@ -4,8 +4,8 @@ extends Node
 onready var hut = 0
 onready var pop = 0
 onready var food = 0
-onready var wood = 0
-onready var stone = 0
+onready var wood = 11111110
+onready var stone = 11111110
 onready var nwood = 50
 onready var flag = 0
 onready var lumberjack = 0
@@ -15,6 +15,7 @@ onready var carbon = 0
 onready var iron = 0
 onready var carbon_miner = 0
 onready var iron_miner = 0
+onready var n_string = 0
 
 #Timer
 onready var timerWood = null
@@ -42,7 +43,7 @@ onready var gather_wood = get_node("gather_wood")
 onready var gather_stone = get_node("gather_stone")
 onready var build_hut = get_node("build_hut")
 onready var gather_food = get_node("gather_food")
-onready var exit_constr_lab = get_node("exit_constr_lab")
+onready var exit = get_node("exit")
 
 #RichTextLabels
 onready var num_wood = get_node("nwood")
@@ -55,6 +56,7 @@ onready var num_stone_gatherer = get_node("nstone_gatherer")
 onready var num_farmer = get_node("nfarmer")
 onready var num_carbon = get_node("ncarbon")
 onready var num_iron = get_node("niron")
+onready var num_string = get_node("nstring")
 
 #lumberjack
 onready var lumberjack_plus = get_node("lumberjack+")
@@ -83,11 +85,13 @@ onready var niron_miner = get_node("niron_miner")
 
 #Buildings
 onready var construction_lab = get_node("constructionLab")
+onready var market = get_node("market")
 
 #items
 onready var pickaxe = get_node("buy_pickaxe")
 onready var axe = get_node("buy_axe")
 onready var hoe = get_node("buy_hoe")
+onready var string = get_node("buy_string")
 
 #mines
 onready var carbon_mine = get_node("carbon_mine")
@@ -179,9 +183,11 @@ func _ready():
 	num_farmer.visible = false
 	num_carbon.visible = false
 	num_iron.visible = false
+	num_string.visible = false
 	
 	#makes buildings non visible
 	construction_lab.visible = false
+	market.visible = false
 	
 	#makes mines non visible
 	carbon_mine.visible = false
@@ -255,6 +261,8 @@ func _on_gather_wood_input_event(viewport, event, shape_idx):
 	if stone >= 75 and wood >= 150:
 		construction_lab.visible = true
 		
+	if iron >= 50:
+		market.visible = true
 	pass # Replace with function body.
 
 
@@ -271,6 +279,8 @@ func _on_gather_stone_input_event(viewport, event, shape_idx):
 	if stone >= 75 and wood >= 150:
 		construction_lab.visible = true
 	
+	if iron >= 50:
+		market.visible = true
 	pass # Replace with function body.
 
 
@@ -333,6 +343,8 @@ func _on_gather_food_input_event(viewport, event, shape_idx):
 	if stone >= 75 and wood >= 150:
 		construction_lab.visible = true
 	
+	if iron >= 50:
+		market.visible = true
 	#auto_pay_food()
 	pass # Replace with function body.
 
@@ -679,12 +691,15 @@ func _on_constructionLab_input_event(viewport, event, shape_idx):
 				info_lumberjack.visible = false
 				info_stone_gatherer.visible = false
 				need_food.visible = false
+				market.visible = false
+				string.visible = false
+				num_string.visible = false
 				
 				#makes items and exit visible
 				pickaxe.visible = true
 				axe.visible = true
 				hoe.visible = true
-				exit_constr_lab.visible = true
+				exit.visible = true
 	
 	pass # Replace with function body.
 
@@ -703,7 +718,7 @@ func _on_buy_pickaxe_input_event(viewport, event, shape_idx):
 
 
 #exit construction lab
-func _on_exit_constr_lab_input_event(viewport, event, shape_idx):
+func _on_exit_input_event(viewport, event, shape_idx):
 	if event is InputEvent:
 		if event.is_pressed():
 			#makes everything visible
@@ -731,7 +746,8 @@ func _on_exit_constr_lab_input_event(viewport, event, shape_idx):
 			info_farmer.visible = true
 			info_lumberjack.visible = true
 			info_stone_gatherer.visible = true
-			need_food.visible = false
+			need_food.visible = true
+			
 			
 			#mines
 			if get_node("buy_pickaxe/Label").text == str("pickaxe (bought)"):
@@ -770,7 +786,16 @@ func _on_exit_constr_lab_input_event(viewport, event, shape_idx):
 			pickaxe.visible = false
 			axe.visible = false
 			hoe.visible = false
-			exit_constr_lab.visible = false
+			exit.visible = false
+			string.visible = false
+			
+			if n_string > 0:
+				num_string.visible = true
+			else:
+				num_string.visible = false
+			
+			if iron >= 50:
+				market.visible = true
 	pass # Replace with function body.
 
 
@@ -811,6 +836,9 @@ func _on_iron_mine_input_event(viewport, event, shape_idx):
 		if event.is_pressed():
 			iron += 1
 			num_iron.text = str("iron: ", iron)
+	
+	if iron >= 50:
+		market.visible = true
 	pass # Replace with function body.
 
 
@@ -889,3 +917,76 @@ func _on_iron_miner_min_input_event(viewport, event, shape_idx):
 
 
 
+
+
+func _on_market_input_event(viewport, event, shape_idx):
+	
+	if event is InputEvent:
+		if event.is_pressed():
+			if wood >= 750 and stone >= 350:
+				wood -= 750
+				num_wood.text = str("wood: ", wood)
+				stone -= 350
+				num_stone.text = str("stone: ", stone)
+				get_node("market/Label").text = str("Market")
+				
+	
+	#get to the lab
+	if get_node("market/Label").text == str("Market"):
+		if event is InputEvent:
+			if event.is_pressed():
+				#makes everything non visible
+				gather_food.visible = false
+				gather_stone.visible = false
+				gather_wood.visible = false
+				build_hut.visible = false
+				num_farmer.visible = false
+				num_food.visible = false
+				num_hut.visible = false
+				num_lumberjack.visible = false
+				num_pop.visible = false
+				num_stone.visible = false
+				num_stone_gatherer.visible = false
+				num_wood.visible = false
+				lumberjack_plus.visible = false
+				lumbrjack_min.visible = false
+				stone_gatherer_min.visible = false
+				stone_gatherer_plus.visible = false
+				nlumberjack.visible = false
+				nstone_gatherer.visible = false
+				farmer_min.visible = false
+				farmer_plus.visible = false
+				construction_lab.visible = false
+				carbon_mine.visible = false
+				num_carbon.visible = false
+				iron_mine.visible = false
+				num_iron.visible = false
+				carbon_miner_plus.visible = false
+				carbon_miner_min.visible = false
+				ncarbon_miner.visible = false
+				iron_miner_plus.visible = false
+				iron_miner_min.visible = false
+				niron_miner.visible = false
+				info_carbon_miner.visible = false
+				info_farmer.visible = false
+				info_iron_miner.visible = false
+				info_lumberjack.visible = false
+				info_stone_gatherer.visible = false
+				need_food.visible = false
+				market.visible = false
+				construction_lab.visible = false
+				num_string.visible = false
+				
+				#makes things visible 
+				exit.visible = true
+				string.visible = true
+	pass # Replace with function body.
+
+
+func _on_buy_string_input_event(viewport, event, shape_idx):
+	if event is InputEvent:
+		if event.is_pressed():
+			if carbon >= 10:
+				n_string += 1
+				num_string.text = str("string: ", n_string)
+	pass # Replace with function body.

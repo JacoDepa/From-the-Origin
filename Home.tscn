@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://test.gd" type="Script" id=1]
 
@@ -41,6 +41,12 @@ extents = Vector2( 64.0729, 13.5356 )
 
 [sub_resource type="RectangleShape2D" id=14]
 
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 190, 20.1328 )
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 114.657, 16.9269 )
+
 [node name="Node" type="Node"]
 script = ExtResource( 1 )
 __meta__ = {
@@ -49,7 +55,7 @@ __meta__ = {
 
 [node name="gather_wood" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 100, 33.2387 )
+position = Vector2( 96.4513, 30.1515 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -75,7 +81,7 @@ text = "wood: 0"
 
 [node name="gather_stone" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 102.757, 80 )
+position = Vector2( 96.4513, 73.8921 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -93,16 +99,16 @@ position = Vector2( -1.62903, 0 )
 shape = SubResource( 2 )
 
 [node name="nstone" type="RichTextLabel" parent="."]
-margin_left = 406.733
-margin_top = 61.8253
-margin_right = 522.733
-margin_bottom = 78.8253
+margin_left = 402.668
+margin_top = 52.3866
+margin_right = 518.668
+margin_bottom = 69.3866
 rect_scale = Vector2( 2, 2 )
 text = "stone: 0"
 
 [node name="build_hut" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 70, 120 )
+position = Vector2( 70, 117.424 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -120,24 +126,24 @@ rect_scale = Vector2( 2, 2 )
 text = "build hut (50 wood)"
 
 [node name="nhut" type="RichTextLabel" parent="."]
-margin_left = 406.733
-margin_top = 104.825
-margin_right = 522.733
-margin_bottom = 124.825
+margin_left = 402.668
+margin_top = 86.3866
+margin_right = 518.668
+margin_bottom = 106.387
 rect_scale = Vector2( 2, 2 )
 text = "hut: 0"
 
 [node name="npopulation" type="RichTextLabel" parent="."]
-margin_left = 407.188
-margin_top = 144.86
-margin_right = 528.188
-margin_bottom = 163.86
+margin_left = 400.0
+margin_top = 117.424
+margin_right = 521.0
+margin_bottom = 136.424
 rect_scale = Vector2( 2, 2 )
 text = "population : 0"
 
 [node name="gather_food" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 92.0032, 152.556 )
+position = Vector2( 92.0032, 150 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -155,10 +161,10 @@ rect_scale = Vector2( 2, 2 )
 text = "gather food"
 
 [node name="nfood" type="RichTextLabel" parent="."]
-margin_left = 405.441
-margin_top = 182.948
-margin_right = 518.441
-margin_bottom = 204.948
+margin_left = 400.0
+margin_top = 155.424
+margin_right = 513.0
+margin_bottom = 177.424
 rect_scale = Vector2( 2, 2 )
 text = "food: 0"
 
@@ -298,7 +304,7 @@ text = "farmer: 0"
 
 [node name="constructionLab" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 125.386, 216.274 )
+position = Vector2( 125.386, 212.963 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -336,7 +342,7 @@ margin_bottom = 1.46313
 rect_scale = Vector2( 2, 2 )
 text = "pickaxe (150 wood, 60 stone)"
 
-[node name="exit_constr_lab" type="Area2D" parent="."]
+[node name="exit" type="Area2D" parent="."]
 editor/display_folded = true
 visible = false
 position = Vector2( 1005.98, 14.6341 )
@@ -344,11 +350,11 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="exit_constr_lab"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit"]
 position = Vector2( -1.67247, 0 )
 shape = SubResource( 10 )
 
-[node name="Label" type="Label" parent="exit_constr_lab"]
+[node name="Label" type="Label" parent="exit"]
 margin_left = -15.0522
 margin_top = -6.27177
 margin_right = 24.9478
@@ -397,7 +403,7 @@ text = "hoe (130 wood, 70 stone)"
 
 [node name="carbon_mine" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 90.4931, 240.103 )
+position = Vector2( 90, 241.359 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -415,16 +421,16 @@ rect_scale = Vector2( 2, 2 )
 text = "carbon mine"
 
 [node name="ncarbon" type="RichTextLabel" parent="."]
-margin_left = 402.0
-margin_top = 216.0
-margin_right = 484.0
-margin_bottom = 237.0
+margin_left = 400.0
+margin_top = 190.0
+margin_right = 482.0
+margin_bottom = 211.0
 rect_scale = Vector2( 2, 2 )
 text = "carbon: 0"
 
 [node name="iron_mine" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 75.4485, 277.788 )
+position = Vector2( 75.4485, 280 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -442,10 +448,10 @@ rect_scale = Vector2( 2, 2 )
 text = "iron mine"
 
 [node name="niron" type="RichTextLabel" parent="."]
-margin_left = 402.668
-margin_top = 255.749
-margin_right = 476.668
-margin_bottom = 277.749
+margin_left = 400.0
+margin_top = 225.454
+margin_right = 474.0
+margin_bottom = 247.454
 rect_scale = Vector2( 2, 2 )
 text = "iron: 0"
 
@@ -486,10 +492,10 @@ text = "_"
 shape = SubResource( 14 )
 
 [node name="ncarbon_miner" type="Label" parent="."]
-margin_left = 705.353
-margin_top = 163.443
-margin_right = 806.353
-margin_bottom = 177.443
+margin_left = 702.654
+margin_top = 164.154
+margin_right = 803.654
+margin_bottom = 178.154
 rect_scale = Vector2( 2, 2 )
 text = "carbon miner: 0"
 
@@ -530,12 +536,12 @@ rect_scale = Vector2( 2, 2 )
 text = "_"
 
 [node name="niron_miner" type="Label" parent="."]
-margin_left = 706.209
-margin_top = 213.359
-margin_right = 796.209
-margin_bottom = 227.359
+margin_left = 703.777
+margin_top = 212.962
+margin_right = 793.777
+margin_bottom = 226.962
 rect_scale = Vector2( 2, 2 )
-text = "steel miner: 0"
+text = "iron miner: 0"
 
 [node name="info_lumberjack" type="Label" parent="."]
 visible = false
@@ -585,6 +591,51 @@ margin_right = 882.391
 margin_bottom = 22.5918
 text = "YOU NEED FOOD TO WORK"
 
+[node name="market" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 206.775, 316.624 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="market"]
+position = Vector2( -0.540359, 2.70177 )
+shape = SubResource( 15 )
+
+[node name="Label" type="Label" parent="market"]
+margin_left = -190.0
+margin_top = -10.0
+margin_bottom = 5.0
+rect_scale = Vector2( 2, 2 )
+text = "Market (750 wood, 350 stone)"
+
+[node name="buy_string" type="Area2D" parent="."]
+editor/display_folded = true
+visible = false
+position = Vector2( 131.984, 30.7265 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="buy_string"]
+margin_left = -112.431
+margin_top = -12.5699
+margin_right = -1.43117
+margin_bottom = 1.43005
+rect_scale = Vector2( 2, 2 )
+text = "string (10 carbon)"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="buy_string"]
+shape = SubResource( 16 )
+
+[node name="nstring" type="Label" parent="."]
+margin_left = 398.673
+margin_top = 257.753
+margin_right = 450.673
+margin_bottom = 271.753
+rect_scale = Vector2( 2, 2 )
+text = "string: 0"
+
 [connection signal="input_event" from="gather_wood" to="." method="_on_gather_wood_input_event"]
 [connection signal="input_event" from="gather_stone" to="." method="_on_gather_stone_input_event"]
 [connection signal="input_event" from="build_hut" to="build_hut" method="_on_build_hut_input_event"]
@@ -599,7 +650,7 @@ text = "YOU NEED FOOD TO WORK"
 [connection signal="input_event" from="farmer-" to="." method="_on_farmer_min_input_event"]
 [connection signal="input_event" from="constructionLab" to="." method="_on_constructionLab_input_event"]
 [connection signal="input_event" from="buy_pickaxe" to="." method="_on_buy_pickaxe_input_event"]
-[connection signal="input_event" from="exit_constr_lab" to="." method="_on_exit_constr_lab_input_event"]
+[connection signal="input_event" from="exit" to="." method="_on_exit_input_event"]
 [connection signal="input_event" from="buy_axe" to="." method="_on_buy_axe_input_event"]
 [connection signal="input_event" from="buy_hoe" to="." method="_on_buy_hoe_input_event"]
 [connection signal="input_event" from="carbon_mine" to="." method="_on_carbon_mine_input_event"]
@@ -608,3 +659,5 @@ text = "YOU NEED FOOD TO WORK"
 [connection signal="input_event" from="carbon_miner_min" to="." method="_on_carbon_miner_min_input_event"]
 [connection signal="input_event" from="iron_miner_plus" to="." method="_on_iron_miner_plus_input_event"]
 [connection signal="input_event" from="iron_miner_min" to="." method="_on_iron_miner_min_input_event"]
+[connection signal="input_event" from="market" to="." method="_on_market_input_event"]
+[connection signal="input_event" from="buy_string" to="." method="_on_buy_string_input_event"]
