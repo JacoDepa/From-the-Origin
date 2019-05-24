@@ -4,8 +4,8 @@ extends Node
 onready var hut = 0
 onready var pop = 0
 onready var food = 0
-onready var wood = 11111110
-onready var stone = 11111110
+onready var wood = 0
+onready var stone = 0
 onready var nwood = 50
 onready var flag = 0
 onready var lumberjack = 0
@@ -989,4 +989,6 @@ func _on_buy_string_input_event(viewport, event, shape_idx):
 			if carbon >= 10:
 				n_string += 1
 				num_string.text = str("string: ", n_string)
+				carbon -= 10
+				num_carbon.text = str("carbon: ", carbon)
 	pass # Replace with function body.
