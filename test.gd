@@ -4,8 +4,8 @@ extends Node
 onready var hut = 0
 onready var pop = 0
 onready var food = 0
-onready var wood = 0
-onready var stone = 0
+onready var wood = 10000
+onready var stone = 10000
 onready var nwood = 50
 onready var flag = 0
 onready var lumberjack = 0
@@ -16,6 +16,7 @@ onready var iron = 0
 onready var carbon_miner = 0
 onready var iron_miner = 0
 onready var n_string = 0
+onready var n_bone = 0
 
 #Timer
 onready var timerWood = null
@@ -57,6 +58,7 @@ onready var num_farmer = get_node("nfarmer")
 onready var num_carbon = get_node("ncarbon")
 onready var num_iron = get_node("niron")
 onready var num_string = get_node("nstring")
+onready var num_bone = get_node("nbone")
 
 #lumberjack
 onready var lumberjack_plus = get_node("lumberjack+")
@@ -86,12 +88,15 @@ onready var niron_miner = get_node("niron_miner")
 #Buildings
 onready var construction_lab = get_node("constructionLab")
 onready var market = get_node("market")
+onready var hunting_hut = get_node("hunting_hut")
 
 #items
 onready var pickaxe = get_node("buy_pickaxe")
 onready var axe = get_node("buy_axe")
 onready var hoe = get_node("buy_hoe")
 onready var string = get_node("buy_string")
+onready var bone = get_node("buy_bone")
+onready var bow = get_node("buy_bow")
 
 #mines
 onready var carbon_mine = get_node("carbon_mine")
@@ -184,10 +189,12 @@ func _ready():
 	num_carbon.visible = false
 	num_iron.visible = false
 	num_string.visible = false
+	num_bone.visible = false
 	
 	#makes buildings non visible
 	construction_lab.visible = false
 	market.visible = false
+	hunting_hut.visible = false
 	
 	#makes mines non visible
 	carbon_mine.visible = false
@@ -243,10 +250,18 @@ func on_timeout_comlete_iron():
 #gather wood
 func _on_gather_wood_input_event(viewport, event, shape_idx):
 	#gather wood
+	var flagg = 0
+	
 	if event is InputEvent:
-		if event.is_pressed():
-			wood += 1
-			num_wood.text = str("wood: ", wood)
+		if event.is_pressed() and not event.is_echo():
+			if flagg == 0:
+				wood += 1
+				num_wood.text = str("wood: ", wood)
+			while flagg <= 10:
+				flagg += 1
+			if flagg == 10:
+				flagg = 0
+	
 	
 	#make buttons visible when wood >= 20
 	if wood >= 20:
@@ -271,7 +286,7 @@ func _on_gather_wood_input_event(viewport, event, shape_idx):
 func _on_gather_stone_input_event(viewport, event, shape_idx):
 	#gather stone
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			stone += 1
 			num_stone.text = str("stone: ", stone)
 	
@@ -289,7 +304,7 @@ func _on_gather_stone_input_event(viewport, event, shape_idx):
 func _on_build_hut_input_event(viewport, event, shape_idx):
 	#buld hut if you have enough wood
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			if wood >= nwood:
 				hut += 1
 				pop += 4
@@ -335,7 +350,7 @@ func _on_build_hut_input_event(viewport, event, shape_idx):
 func _on_gather_food_input_event(viewport, event, shape_idx):
 	#gather food
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			food += 1
 			num_food.text = str("food: ", food)
 	
@@ -354,7 +369,7 @@ func _on_gather_food_input_event(viewport, event, shape_idx):
 func _on_lumberjack_input_event(viewport, event, shape_idx):
 	#augment lumberjack num
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			if pop > 0:
 				lumberjack += 1
 				pop -= 1
@@ -377,7 +392,7 @@ func _on_lumberjack_input_event(viewport, event, shape_idx):
 func _on_lumberjack_min_input_event(viewport, event, shape_idx):
 	#decrease lumberjack num
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			if lumberjack > 0:
 				lumberjack -= 1
 				pop += 1
@@ -399,7 +414,7 @@ func _on_lumberjack_min_input_event(viewport, event, shape_idx):
 func _on_stone_gatherer_input_event(viewport, event, shape_idx):
 	#increase stone gatherer num
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			if pop > 0:
 				stone_gatherer += 1
 				pop -= 1
@@ -416,7 +431,7 @@ func _on_stone_gatherer_input_event(viewport, event, shape_idx):
 func _on_stone_gatherer_min_input_event(viewport, event, shape_idx):
 	#decrease dtone gatherer num
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			if stone_gatherer > 0:
 				stone_gatherer -= 1
 				pop += 1
@@ -434,7 +449,7 @@ func _on_stone_gatherer_min_input_event(viewport, event, shape_idx):
 func _on_farmer_input_event(viewport, event, shape_idx):
 	#increase farmer num
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			if pop > 0:
 				farmer += 1
 				pop -= 1
@@ -457,7 +472,7 @@ func _on_farmer_input_event(viewport, event, shape_idx):
 func _on_farmer_min_input_event(viewport, event, shape_idx):
 	#decrease farmer num
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			if farmer > 0:
 				farmer -= 1
 				pop += 1
@@ -640,7 +655,7 @@ func _on_constructionLab_input_event(viewport, event, shape_idx):
 	
 	#unlock constructio lab
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			if wood >= 500 and stone >= 150:
 				wood -= 500
 				num_wood.text = str("wood: ", wood)
@@ -652,7 +667,7 @@ func _on_constructionLab_input_event(viewport, event, shape_idx):
 	#get to the lab
 	if get_node("constructionLab/Label").text == str("Construction Lab"):
 		if event is InputEvent:
-			if event.is_pressed():
+			if event.is_pressed() and not event.is_echo():
 				#makes everything non visible
 				gather_food.visible = false
 				gather_stone.visible = false
@@ -694,12 +709,19 @@ func _on_constructionLab_input_event(viewport, event, shape_idx):
 				market.visible = false
 				string.visible = false
 				num_string.visible = false
+				bone.visible = false
+				num_bone.visible = false
+				hunting_hut.visible = false
 				
 				#makes items and exit visible
 				pickaxe.visible = true
 				axe.visible = true
 				hoe.visible = true
 				exit.visible = true
+				if n_string >= 5:
+					bow.visible = true
+				else:
+					bow.visible = false
 	
 	pass # Replace with function body.
 
@@ -710,7 +732,7 @@ func _on_buy_pickaxe_input_event(viewport, event, shape_idx):
 	#buy pickaxe
 	if wood >= 150 and stone >= 60:
 		if event is InputEvent:
-			if event.is_pressed():
+			if event.is_pressed() and not event.is_echo():
 				get_node("buy_pickaxe/Label").text = str("pickaxe (bought)")
 	pass # Replace with function body.
 
@@ -720,7 +742,7 @@ func _on_buy_pickaxe_input_event(viewport, event, shape_idx):
 #exit construction lab
 func _on_exit_input_event(viewport, event, shape_idx):
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			#makes everything visible
 			gather_food.visible = true
 			gather_stone.visible = true
@@ -782,17 +804,33 @@ func _on_exit_input_event(viewport, event, shape_idx):
 				info_carbon_miner.visible = false
 				info_iron_miner.visible = false
 			
+			if get_node("buy_bow/Label").text == str("bow (bought)"):
+				#unlock hunting hut
+				hunting_hut.visible = true
+			else:
+				hunting_hut.visible = false
+				#not ulock hunting hut
+			
+			
+			
 			#makes items and exit non visible
 			pickaxe.visible = false
 			axe.visible = false
 			hoe.visible = false
 			exit.visible = false
 			string.visible = false
+			bone.visible = false
+			bow.visible = false
 			
 			if n_string > 0:
 				num_string.visible = true
 			else:
 				num_string.visible = false
+				
+			if n_bone > 0:
+				num_bone.visible = true
+			else:
+				num_bone.visible = false
 			
 			if iron >= 50:
 				market.visible = true
@@ -804,7 +842,7 @@ func _on_exit_input_event(viewport, event, shape_idx):
 func _on_buy_axe_input_event(viewport, event, shape_idx):
 	if wood >= 150 and stone >= 70:
 		if event is InputEvent:
-			if event.is_pressed():
+			if event.is_pressed() and not event.is_echo():
 				get_node("buy_axe/Label").text = str("axe (bought)")
 	pass # Replace with function body.
 
@@ -814,7 +852,7 @@ func _on_buy_axe_input_event(viewport, event, shape_idx):
 func _on_buy_hoe_input_event(viewport, event, shape_idx):
 	if wood >= 130 and stone >= 70:
 		if event is InputEvent:
-			if event.is_pressed():
+			if event.is_pressed() and not event.is_echo():
 				get_node("buy_hoe/Label").text = str("hoe (bought)")
 	pass # Replace with function body.
 
@@ -823,7 +861,7 @@ func _on_buy_hoe_input_event(viewport, event, shape_idx):
 #carbon mine: carbon + 1 per click
 func _on_carbon_mine_input_event(viewport, event, shape_idx):
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			carbon += 1
 			num_carbon.text = str("carbon: ", carbon)
 	pass # Replace with function body.
@@ -833,7 +871,7 @@ func _on_carbon_mine_input_event(viewport, event, shape_idx):
 #iron mine : iron +1 per click
 func _on_iron_mine_input_event(viewport, event, shape_idx):
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			iron += 1
 			num_iron.text = str("iron: ", iron)
 	
@@ -846,7 +884,7 @@ func _on_iron_mine_input_event(viewport, event, shape_idx):
 #add carbon miner
 func _on_carbon_miner_plus_input_event(viewport, event, shape_idx):
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			if pop > 0:
 				carbon_miner += 1
 				pop -= 1
@@ -865,7 +903,7 @@ func _on_carbon_miner_plus_input_event(viewport, event, shape_idx):
 #remove carbon miner
 func _on_carbon_miner_min_input_event(viewport, event, shape_idx):
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			if carbon_miner > 0:
 				carbon_miner -= 1
 				pop += 1
@@ -883,7 +921,7 @@ func _on_carbon_miner_min_input_event(viewport, event, shape_idx):
 #add iron miner
 func _on_iron_miner_plus_input_event(viewport, event, shape_idx):
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			if pop > 0:
 				iron_miner += 1
 				pop -= 1
@@ -902,7 +940,7 @@ func _on_iron_miner_plus_input_event(viewport, event, shape_idx):
 #remove iron miner
 func _on_iron_miner_min_input_event(viewport, event, shape_idx):
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			if iron_miner > 0:
 				iron_miner -= 1
 				pop += 1
@@ -922,7 +960,7 @@ func _on_iron_miner_min_input_event(viewport, event, shape_idx):
 func _on_market_input_event(viewport, event, shape_idx):
 	
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			if wood >= 750 and stone >= 350:
 				wood -= 750
 				num_wood.text = str("wood: ", wood)
@@ -934,7 +972,7 @@ func _on_market_input_event(viewport, event, shape_idx):
 	#get to the lab
 	if get_node("market/Label").text == str("Market"):
 		if event is InputEvent:
-			if event.is_pressed():
+			if event.is_pressed() and not event.is_echo():
 				#makes everything non visible
 				gather_food.visible = false
 				gather_stone.visible = false
@@ -976,19 +1014,53 @@ func _on_market_input_event(viewport, event, shape_idx):
 				market.visible = false
 				construction_lab.visible = false
 				num_string.visible = false
+				num_bone.visible = false
+				hunting_hut.visible = false
 				
 				#makes things visible 
 				exit.visible = true
 				string.visible = true
+				bone.visible = true
 	pass # Replace with function body.
 
 
 func _on_buy_string_input_event(viewport, event, shape_idx):
 	if event is InputEvent:
-		if event.is_pressed():
+		if event.is_pressed() and not event.is_echo():
 			if carbon >= 10:
 				n_string += 1
 				num_string.text = str("string: ", n_string)
 				carbon -= 10
 				num_carbon.text = str("carbon: ", carbon)
+	pass # Replace with function body.
+
+
+func _on_buy_bone_input_event(viewport, event, shape_idx):
+	if event is InputEvent:
+		if event.is_pressed() and not event.is_echo():
+			if carbon >= 2:
+				n_bone += 1
+				num_bone.text = str("bone: ", n_bone)
+				carbon -= 2
+				num_carbon.text = str("carbon: ", carbon)
+	pass # Replace with function body.
+
+
+func _on_buy_bow_input_event(viewport, event, shape_idx):
+	if event is InputEvent:
+		if event.is_pressed():
+			if n_string >= 10 and wood >= 100:
+				get_node("buy_bow/Label").text = str("bow (bought)")
+				n_string -= 10
+				num_string.text = str("string: ", n_string)
+				wood -= 100
+				num_wood.text = str("wood: ", wood)
+	pass # Replace with function body.
+
+
+func _on_hunting_hut_input_event(viewport, event, shape_idx):
+	if event is InputEvent:
+		if event.is_pressed():
+			if wood >= 1050 and stone >= 500 and iron >= 20:
+				get_node("hunting_hut/Label").text = str("Hunting hut")
 	pass # Replace with function body.
