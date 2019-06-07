@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Iosicon2.png-98fe911fd41a33c3b3010b3f986921af.stex"
+path="res://.import/Iosicon2.png-fa4aed38f62f7f0152da755265acf730.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Iosicon2.png"
-dest_files=[ "res://.import/Iosicon2.png-98fe911fd41a33c3b3010b3f986921af.stex" ]
+source_file="res://icons/Iosicon2.png"
+dest_files=[ "res://.import/Iosicon2.png-fa4aed38f62f7f0152da755265acf730.stex" ]
 
 [params]
 

@@ -4,8 +4,8 @@ extends Node
 onready var hut = 0
 onready var pop = 0
 onready var food = 0
-onready var wood = 0
-onready var stone = 0
+onready var wood = 10000
+onready var stone = 10000
 onready var nwood = 50
 onready var flag = 0
 onready var lumberjack = 0
@@ -17,9 +17,6 @@ onready var carbon_miner = 0
 onready var iron_miner = 0
 onready var n_string = 0
 onready var n_bone = 0
-onready var gold = 0
-onready var fur = 0
-onready var n_leather = 0
 
 #Timer
 onready var timerWood = null
@@ -62,9 +59,6 @@ onready var num_carbon = get_node("ncarbon")
 onready var num_iron = get_node("niron")
 onready var num_string = get_node("nstring")
 onready var num_bone = get_node("nbone")
-onready var num_fur = get_node("nfur")
-onready var num_leather = get_node("nleather")
-
 
 #lumberjack
 onready var lumberjack_plus = get_node("lumberjack+")
@@ -103,9 +97,6 @@ onready var hoe = get_node("buy_hoe")
 onready var string = get_node("buy_string")
 onready var bone = get_node("buy_bone")
 onready var bow = get_node("buy_bow")
-onready var compass = get_node("buy_compass")
-onready var leather = get_node("buy_leather")
-
 
 #mines
 onready var carbon_mine = get_node("carbon_mine")
@@ -199,8 +190,6 @@ func _ready():
 	num_iron.visible = false
 	num_string.visible = false
 	num_bone.visible = false
-	num_fur.visible = false
-	num_leather.visible = false
 	
 	#makes buildings non visible
 	construction_lab.visible = false
@@ -723,10 +712,6 @@ func _on_constructionLab_input_event(viewport, event, shape_idx):
 				bone.visible = false
 				num_bone.visible = false
 				hunting_hut.visible = false
-				compass.visible = false
-				num_fur.visible = false
-				num_leather.visible = false
-				leather.visible = false
 				
 				#makes items and exit visible
 				pickaxe.visible = true
@@ -836,8 +821,6 @@ func _on_exit_input_event(viewport, event, shape_idx):
 			string.visible = false
 			bone.visible = false
 			bow.visible = false
-			compass.visible = false
-			leather.visible = false
 			
 			if n_string > 0:
 				num_string.visible = true
@@ -851,11 +834,6 @@ func _on_exit_input_event(viewport, event, shape_idx):
 			
 			if iron >= 50:
 				market.visible = true
-				
-			if n_leather > 0:
-				num_leather.visible = true
-			else:
-				num_leather.visible = false
 	pass # Replace with function body.
 
 
@@ -1043,8 +1021,6 @@ func _on_market_input_event(viewport, event, shape_idx):
 				exit.visible = true
 				string.visible = true
 				bone.visible = true
-				compass.visible = true
-				leather.visible = true
 	pass # Replace with function body.
 
 
@@ -1087,28 +1063,4 @@ func _on_hunting_hut_input_event(viewport, event, shape_idx):
 		if event.is_pressed():
 			if wood >= 1050 and stone >= 500 and iron >= 20:
 				get_node("hunting_hut/Label").text = str("Hunting hut")
-				num_fur.text = str("fur: ", fur)
-	pass # Replace with function body.
-
-"""REMEMBER TO CHECK IF THIS WORKS WHENT CREATING GOLD MINERS"""
-func _on_buy_compass_input_event(viewport, event, shape_idx):
-	if event is InputEvent:
-		if event.is_pressed():
-			if iron >= 100 and gold >= 10:
-				iron -= 100
-				num_iron.text = str("iron: ", iron)
-				gold -= 10
-				#REMEMBER TO MAKE GOLD COUNT ON SCREEN CHANGE
-				get_node("buy_compass/Label").text = str("compass (bought)")
-	pass # Replace with function body.
-
-
-func _on_buy_leather_input_event(viewport, event, shape_idx):
-	if event is InputEvent:
-		if event.is_pressed():
-			if fur >= 5:
-				fur -= 5
-				num_fur.text = str("fur: ", fur)
-				leather += 1
-				num_leather.text = str("leather: ", leather)
 	pass # Replace with function body.

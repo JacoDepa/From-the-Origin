@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/from_the_origin_banner.png-dfeef114b7dded024dd0e8a662f9991b.stex"
+path="res://.import/landscapelaunchscreen2.png-c2a7876edebb8118256b7065057519ee.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://from_the_origin_banner.png"
-dest_files=[ "res://.import/from_the_origin_banner.png-dfeef114b7dded024dd0e8a662f9991b.stex" ]
+source_file="res://icons/landscapelaunchscreen2.png"
+dest_files=[ "res://.import/landscapelaunchscreen2.png-c2a7876edebb8118256b7065057519ee.stex" ]
 
 [params]
 

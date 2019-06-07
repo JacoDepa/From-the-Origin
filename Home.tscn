@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://test.gd" type="Script" id=1]
 
@@ -55,6 +55,12 @@ extents = Vector2( 167.653, 18.1765 )
 
 [sub_resource type="RectangleShape2D" id=19]
 extents = Vector2( 82.9283, 15.4703 )
+
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 180.219, 15.0699 )
+
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 90.4673, 15.1751 )
 
 [node name="Node" type="Node"]
 script = ExtResource( 1 )
@@ -713,6 +719,62 @@ rect_scale = Vector2( 2, 2 )
 text = "Hunting hut
 (1050 wood, 500 stone, 20 iron)"
 
+[node name="nfur" type="Label" parent="."]
+margin_left = 321.739
+margin_top = 322.567
+margin_right = 361.739
+margin_bottom = 336.567
+rect_scale = Vector2( 2, 2 )
+text = "fur: 0"
+
+[node name="buy_compass" type="Area2D" parent="."]
+editor/display_folded = true
+visible = false
+position = Vector2( 174.302, 118.102 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="buy_compass"]
+position = Vector2( 24.8563, 1.62106 )
+shape = SubResource( 20 )
+
+[node name="Label" type="Label" parent="buy_compass"]
+margin_left = -154.541
+margin_top = -12.4281
+margin_right = 22.4587
+margin_bottom = 1.57186
+rect_scale = Vector2( 2, 2 )
+text = "compass (100 iron, 10 gold)"
+
+[node name="buy_leather" type="Area2D" parent="."]
+editor/display_folded = true
+visible = false
+position = Vector2( 97.7397, 160.456 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="buy_leather"]
+margin_left = -79.8207
+margin_top = -12.2175
+margin_right = 6.17926
+margin_bottom = 1.78254
+rect_scale = Vector2( 2, 2 )
+text = "leather (5 fur)"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="buy_leather"]
+position = Vector2( 6.51599, 0 )
+shape = SubResource( 21 )
+
+[node name="nleather" type="Label" parent="."]
+margin_left = 321.064
+margin_top = 354.527
+margin_right = 382.064
+margin_bottom = 368.527
+rect_scale = Vector2( 2, 2 )
+text = "leather: 0"
+
 [connection signal="input_event" from="gather_wood" to="." method="_on_gather_wood_input_event"]
 [connection signal="input_event" from="gather_stone" to="." method="_on_gather_stone_input_event"]
 [connection signal="input_event" from="build_hut" to="build_hut" method="_on_build_hut_input_event"]
@@ -741,3 +803,5 @@ text = "Hunting hut
 [connection signal="input_event" from="buy_bone" to="." method="_on_buy_bone_input_event"]
 [connection signal="input_event" from="buy_bow" to="." method="_on_buy_bow_input_event"]
 [connection signal="input_event" from="hunting_hut" to="." method="_on_hunting_hut_input_event"]
+[connection signal="input_event" from="buy_compass" to="." method="_on_buy_compass_input_event"]
+[connection signal="input_event" from="buy_leather" to="." method="_on_buy_leather_input_event"]

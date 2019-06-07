@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/landscapelaunchscreen1.png-e9c3cd3546c53d090f31a9d3cc27f325.stex"
+path="res://.import/icon1.png-a87f9fb0b3b2c0ac5e1ac803d1dbaa15.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://landscapelaunchscreen1.png"
-dest_files=[ "res://.import/landscapelaunchscreen1.png-e9c3cd3546c53d090f31a9d3cc27f325.stex" ]
+source_file="res://icons/icon1.png"
+dest_files=[ "res://.import/icon1.png-a87f9fb0b3b2c0ac5e1ac803d1dbaa15.stex" ]
 
 [params]
 

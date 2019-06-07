@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/landscapelaunchscreen3.png-39f50ebabb550e2e136d187082bbfca4.stex"
+path="res://.import/iosicon1.png-49e60ff993aac01a2216392446eb5124.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://landscapelaunchscreen3.png"
-dest_files=[ "res://.import/landscapelaunchscreen3.png-39f50ebabb550e2e136d187082bbfca4.stex" ]
+source_file="res://icons/iosicon1.png"
+dest_files=[ "res://.import/iosicon1.png-49e60ff993aac01a2216392446eb5124.stex" ]
 
 [params]
 
