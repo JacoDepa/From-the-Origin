@@ -836,6 +836,7 @@ func _on_exit_input_event(viewport, event, shape_idx):
 			info_lumberjack.visible = true
 			info_stone_gatherer.visible = true
 			need_food.visible = true
+			num_fur.visible = true
 			
 			
 			
@@ -1105,6 +1106,7 @@ func _on_market_input_event(viewport, event, shape_idx):
 				hunter_plus.visible = false
 				nhunter.visible = false
 				info_hunter.visible = false
+				num_fur.visible = false
 				
 				#makes things visible 
 				exit.visible = true
@@ -1185,7 +1187,7 @@ func _on_buy_leather_input_event(viewport, event, shape_idx):
 			if fur >= 5:
 				fur -= 5
 				num_fur.text = str("fur: ", fur)
-				leather += 1
+				n_leather += 1
 				num_leather.text = str("leather: ", leather)
 	pass # Replace with function body.
 
