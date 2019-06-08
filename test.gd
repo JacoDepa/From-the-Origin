@@ -20,6 +20,7 @@ onready var n_bone = 0
 onready var gold = 0
 onready var fur = 0
 onready var n_leather = 0
+onready var hunter = 0 
 
 #Timer
 onready var timerWood = null
@@ -27,13 +28,19 @@ onready var timerStone = null
 onready var timerFood = null
 onready var timerCarbon = null
 onready var timerIron = null
+onready var timerHunter = null
+
 onready var delay = 10
 onready var mine_delay = 40 
+onready var hunter_delay = 30 
+
 onready var can_gather_wood = true
 onready var can_gather_stone = true
 onready var can_gather_food = true
 onready var can_gather_carbon = true
 onready var can_gather_iron = true
+onready var can_gather_fur = true
+
 
 """
 #food timer
@@ -91,6 +98,11 @@ onready var iron_miner_plus = get_node("iron_miner_plus")
 onready var iron_miner_min = get_node("iron_miner_min")
 onready var niron_miner = get_node("niron_miner")
 
+#hunter
+onready var hunter_plus = get_node("hunter_plus")
+onready var hunter_min = get_node("hunter_min")
+onready var nhunter = get_node("nhunter")
+
 #Buildings
 onready var construction_lab = get_node("constructionLab")
 onready var market = get_node("market")
@@ -117,6 +129,7 @@ onready var info_stone_gatherer = get_node("info_stone_gatherer")
 onready var info_farmer = get_node("info_farmer")
 onready var info_carbon_miner = get_node("info_carbon_miner")
 onready var info_iron_miner = get_node("info_iron_miner")
+onready var info_hunter = get_node("info_hunter")
 onready var need_food = get_node("need_food")
 
 func _ready():
@@ -156,6 +169,13 @@ func _ready():
 	timerIron.connect("timeout", self, "on_timeout_comlete_iron")
 	add_child(timerIron)
 	
+	#auto gather fur timer
+	timerHunter = Timer.new()
+	timerHunter.set_one_shot(true)
+	timerHunter.set_wait_time(hunter_delay)
+	timerHunter.connect("timeout", self, "on_timeout_complete_fur")
+	add_child(timerHunter)
+	
 	"""
 	#time to pay food timer
 	food_pay_timer = Timer.new()
@@ -165,7 +185,7 @@ func _ready():
 	add_child(food_pay_timer)
 	"""
 	
-	#makes works and workes num non visible
+	#makes works and works num non visible
 	lumberjack_plus.visible = false
 	lumbrjack_min.visible = false
 	nlumberjack.visible = false
@@ -181,6 +201,9 @@ func _ready():
 	iron_miner_min.visible = false
 	iron_miner_plus.visible = false
 	niron_miner.visible = false
+	hunter_min.visible = false
+	hunter_plus.visible = false
+	nhunter.visible = false
 	
 	#make buttons non visibles
 	gather_stone.visible = false
@@ -256,6 +279,10 @@ func on_timeout_comlete_iron():
 	can_gather_iron = true
 	auto_gather_iron()
 
+#activate fur auto gather
+func on_timeout_complete_fur():
+	can_gather_fur = true
+	auto_gather_fur()
 
 
 #gather wood
@@ -622,6 +649,27 @@ func auto_gather_iron():
 	else:
 		pass
 
+
+#auto gather 2 fur every 30 sec per hunter
+func auto_gather_fur():
+	if food > 0:
+		if hunter > 0:
+			if can_gather_fur == true:
+				fur += (2 * hunter)
+				food -= hunter
+				num_food.text = str("food: ", food)
+				can_gather_fur = false
+				timerHunter.start()
+				num_fur.text = str("fur: ", fur)
+			else:
+				pass
+		else:
+			pass
+	else:
+		pass
+
+
+
 """
 #automatically subtruct 10 food per hut every 2.5 min
 func auto_pay_food():
@@ -727,6 +775,10 @@ func _on_constructionLab_input_event(viewport, event, shape_idx):
 				num_fur.visible = false
 				num_leather.visible = false
 				leather.visible = false
+				hunter_min.visible = false
+				hunter_plus.visible = false
+				nhunter.visible = false
+				info_hunter.visible = false
 				
 				#makes items and exit visible
 				pickaxe.visible = true
@@ -786,6 +838,7 @@ func _on_exit_input_event(viewport, event, shape_idx):
 			need_food.visible = true
 			
 			
+			
 			#mines
 			if get_node("buy_pickaxe/Label").text == str("pickaxe (bought)"):
 				carbon_mine.visible = true
@@ -825,6 +878,16 @@ func _on_exit_input_event(viewport, event, shape_idx):
 			else:
 				hunting_hut.visible = false
 				#not ulock hunting hut
+			
+			if get_node("hunting_hut/Label").text == str("Hunting hut"):
+				hunter_min.visible = true
+				hunter_plus.visible = true
+				nhunter.visible = true
+			else:
+				hunter_min.visible = false
+				hunter_plus.visible = false
+				nhunter.visible = false
+			
 			
 			
 			
@@ -1038,6 +1101,10 @@ func _on_market_input_event(viewport, event, shape_idx):
 				num_string.visible = false
 				num_bone.visible = false
 				hunting_hut.visible = false
+				hunter_min.visible = false
+				hunter_plus.visible = false
+				nhunter.visible = false
+				info_hunter.visible = false
 				
 				#makes things visible 
 				exit.visible = true
@@ -1087,7 +1154,16 @@ func _on_hunting_hut_input_event(viewport, event, shape_idx):
 		if event.is_pressed():
 			if wood >= 1050 and stone >= 500 and iron >= 20:
 				get_node("hunting_hut/Label").text = str("Hunting hut")
-				num_fur.text = str("fur: ", fur)
+				wood -= 1050
+				stone -= 500
+				iron -= 20
+				num_wood.text = str("wood: ", wood)
+				num_stone.text = str("stone: ", stone)
+				num_iron.text = str("iron: ", iron)
+				hunter_min.visible = true
+				hunter_plus.visible = true
+				nhunter.visible = true
+				num_fur.visible = true
 	pass # Replace with function body.
 
 """REMEMBER TO CHECK IF THIS WORKS WHENT CREATING GOLD MINERS"""
@@ -1111,4 +1187,35 @@ func _on_buy_leather_input_event(viewport, event, shape_idx):
 				num_fur.text = str("fur: ", fur)
 				leather += 1
 				num_leather.text = str("leather: ", leather)
+	pass # Replace with function body.
+
+
+func _on_hunter_plus_input_event(viewport, event, shape_idx):
+	if event is InputEvent:
+		if event.is_pressed():
+			if pop > 0:
+				hunter += 1
+				pop -= 1
+				nhunter.text = str("hunter: ", hunter)
+				num_pop.text = str("population: ", pop)
+	
+	if hunter > 0:
+		info_hunter.visible = true
+		info_hunter.text = str("+", (2 * hunter), " fur in 30 sec")
+	
+	auto_gather_fur()
+	pass # Replace with function body.
+
+
+func _on_hunter_min_input_event(viewport, event, shape_idx):
+	if event is InputEvent:
+		if event.is_pressed():
+			if hunter > 0:
+				hunter -= 1
+				pop += 1
+				nhunter.text = str("hunter: ", hunter)
+				num_pop.text = str("population: ", pop)
+	
+	if hunter == 0:
+		info_hunter.visible = false
 	pass # Replace with function body.

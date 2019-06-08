@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://test.gd" type="Script" id=1]
 
@@ -61,6 +61,10 @@ extents = Vector2( 180.219, 15.0699 )
 
 [sub_resource type="RectangleShape2D" id=21]
 extents = Vector2( 90.4673, 15.1751 )
+
+[sub_resource type="RectangleShape2D" id=22]
+
+[sub_resource type="RectangleShape2D" id=23]
 
 [node name="Node" type="Node"]
 script = ExtResource( 1 )
@@ -185,7 +189,7 @@ text = "food: 0"
 
 [node name="lumberjack+" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 767.36, 45.0402 )
+position = Vector2( 782.723, 42.2469 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -204,7 +208,7 @@ text = "+ /"
 
 [node name="lumberjack-" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 807.768, 45.629 )
+position = Vector2( 823.131, 42.8357 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -230,7 +234,7 @@ text = "lumberjack: 0"
 
 [node name="stone_gatherer+" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 775.521, 85.8511 )
+position = Vector2( 790.186, 86.5494 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -249,7 +253,7 @@ text = "+ /"
 
 [node name="stone_gatherer-" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 815.458, 85.6884 )
+position = Vector2( 830.123, 86.3867 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -275,7 +279,7 @@ text = "stone gatherer: 0"
 
 [node name="farmer+" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 696.036, 133.087 )
+position = Vector2( 717.684, 131.69 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -293,7 +297,7 @@ text = "+ /"
 
 [node name="farmer-" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 738.685, 133.505 )
+position = Vector2( 760.333, 132.108 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -472,7 +476,7 @@ text = "iron: 0"
 
 [node name="carbon_miner_plus" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 768.529, 175.417 )
+position = Vector2( 790.876, 175.417 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -490,7 +494,7 @@ text = "+ /"
 
 [node name="carbon_miner_min" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 808.417, 176.525 )
+position = Vector2( 830.763, 176.525 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -516,7 +520,7 @@ text = "carbon miner: 0"
 
 [node name="iron_miner_plus" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 754.98, 224.225 )
+position = Vector2( 757.966, 223.626 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -534,7 +538,7 @@ text = "+ /"
 
 [node name="iron_miner_min" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 796.792, 224.037 )
+position = Vector2( 799.778, 223.438 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -768,12 +772,64 @@ position = Vector2( 6.51599, 0 )
 shape = SubResource( 21 )
 
 [node name="nleather" type="Label" parent="."]
-margin_left = 321.064
-margin_top = 354.527
-margin_right = 382.064
-margin_bottom = 368.527
+margin_left = 322.325
+margin_top = 352.636
+margin_right = 383.325
+margin_bottom = 366.636
 rect_scale = Vector2( 2, 2 )
 text = "leather: 0"
+
+[node name="hunter_plus" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 696.396, 269.505 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hunter_plus"]
+shape = SubResource( 22 )
+
+[node name="Label" type="Label" parent="hunter_plus"]
+margin_left = -7.16003
+margin_top = -13.3467
+margin_right = 10.84
+margin_bottom = 0.653259
+rect_scale = Vector2( 2, 2 )
+text = "+ /"
+
+[node name="hunter_min" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 738.489, 268.992 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hunter_min"]
+shape = SubResource( 23 )
+
+[node name="Label" type="Label" parent="hunter_min"]
+margin_left = -5.55315
+margin_top = -23.8404
+margin_right = 1.44685
+margin_bottom = -9.84038
+rect_scale = Vector2( 2, 2 )
+text = "_"
+
+[node name="nhunter" type="Label" parent="."]
+margin_left = 540.997
+margin_top = 256.714
+margin_right = 586.997
+margin_bottom = 270.714
+rect_scale = Vector2( 2, 2 )
+text = "hunter: 0"
+
+[node name="info_hunter" type="Label" parent="."]
+visible = false
+margin_left = 541.822
+margin_top = 285.869
+margin_right = 640.822
+margin_bottom = 299.869
+text = "+0 fur in 30 sec"
 
 [connection signal="input_event" from="gather_wood" to="." method="_on_gather_wood_input_event"]
 [connection signal="input_event" from="gather_stone" to="." method="_on_gather_stone_input_event"]
@@ -805,3 +861,5 @@ text = "leather: 0"
 [connection signal="input_event" from="hunting_hut" to="." method="_on_hunting_hut_input_event"]
 [connection signal="input_event" from="buy_compass" to="." method="_on_buy_compass_input_event"]
 [connection signal="input_event" from="buy_leather" to="." method="_on_buy_leather_input_event"]
+[connection signal="input_event" from="hunter_plus" to="." method="_on_hunter_plus_input_event"]
+[connection signal="input_event" from="hunter_min" to="." method="_on_hunter_min_input_event"]
