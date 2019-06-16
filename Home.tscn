@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://test.gd" type="Script" id=1]
 
@@ -65,6 +65,9 @@ extents = Vector2( 90.4673, 15.1751 )
 [sub_resource type="RectangleShape2D" id=22]
 
 [sub_resource type="RectangleShape2D" id=23]
+
+[sub_resource type="RectangleShape2D" id=24]
+extents = Vector2( 216.692, 16.0655 )
 
 [node name="Node" type="Node"]
 script = ExtResource( 1 )
@@ -831,6 +834,26 @@ margin_right = 640.822
 margin_bottom = 299.869
 text = "+0 fur in 30 sec"
 
+[node name="buy_iron_pickaxe" type="Area2D" parent="."]
+editor/display_folded = true
+visible = false
+position = Vector2( 217.43, 201.954 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="buy_iron_pickaxe"]
+position = Vector2( 13.9279, 1.54755 )
+shape = SubResource( 24 )
+
+[node name="Label" type="Label" parent="buy_iron_pickaxe"]
+margin_left = -198.945
+margin_top = -10.5262
+margin_right = 13.0551
+margin_bottom = 3.47382
+rect_scale = Vector2( 2, 2 )
+text = "iron pickaxe (100 wood, 150 iron)"
+
 [connection signal="input_event" from="gather_wood" to="." method="_on_gather_wood_input_event"]
 [connection signal="input_event" from="gather_stone" to="." method="_on_gather_stone_input_event"]
 [connection signal="input_event" from="build_hut" to="build_hut" method="_on_build_hut_input_event"]
@@ -863,3 +886,4 @@ text = "+0 fur in 30 sec"
 [connection signal="input_event" from="buy_leather" to="." method="_on_buy_leather_input_event"]
 [connection signal="input_event" from="hunter_plus" to="." method="_on_hunter_plus_input_event"]
 [connection signal="input_event" from="hunter_min" to="." method="_on_hunter_min_input_event"]
+[connection signal="input_event" from="buy_iron_pickaxe" to="." method="_on_buy_iron_pickaxe_input_event"]

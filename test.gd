@@ -4,8 +4,8 @@ extends Node
 onready var hut = 0
 onready var pop = 0
 onready var food = 0
-onready var wood = 0
-onready var stone = 0
+onready var wood = 1000000
+onready var stone = 1000000
 onready var nwood = 50
 onready var flag = 0
 onready var lumberjack = 0
@@ -41,13 +41,6 @@ onready var can_gather_carbon = true
 onready var can_gather_iron = true
 onready var can_gather_fur = true
 
-
-"""
-#food timer
-onready var food_pay_timer = null
-onready var food_pay_delay = 10
-onready var time_to_pay_food = true
-"""
 
 #Buttons
 onready var gather_wood = get_node("gather_wood")
@@ -108,13 +101,16 @@ onready var construction_lab = get_node("constructionLab")
 onready var market = get_node("market")
 onready var hunting_hut = get_node("hunting_hut")
 
-#items
+	#items
+#construction lab
 onready var pickaxe = get_node("buy_pickaxe")
 onready var axe = get_node("buy_axe")
 onready var hoe = get_node("buy_hoe")
+onready var bow = get_node("buy_bow")
+onready var iron_pickaxe = get_node("buy_iron_pickaxe")
+#market
 onready var string = get_node("buy_string")
 onready var bone = get_node("buy_bone")
-onready var bow = get_node("buy_bow")
 onready var compass = get_node("buy_compass")
 onready var leather = get_node("buy_leather")
 
@@ -176,14 +172,6 @@ func _ready():
 	timerHunter.connect("timeout", self, "on_timeout_complete_fur")
 	add_child(timerHunter)
 	
-	"""
-	#time to pay food timer
-	food_pay_timer = Timer.new()
-	food_pay_timer.set_one_shot(true)
-	food_pay_timer.set_wait_time(food_pay_delay)
-	food_pay_timer.connect("time_to_pay_food", self, "time_to_pay_food")
-	add_child(food_pay_timer)
-	"""
 	
 	#makes works and works num non visible
 	lumberjack_plus.visible = false
@@ -236,14 +224,6 @@ func _ready():
 	
 	
 	pass
-
-
-"""
-#activate time to pay food
-func time_to_pay_food():
-	time_to_pay_food = true
-	auto_pay_food()
-"""
 
 
 #activate wood auto gather
@@ -669,47 +649,6 @@ func auto_gather_fur():
 		pass
 
 
-
-"""
-#automatically subtruct 10 food per hut every 2.5 min
-func auto_pay_food():
-	if hut > 0:
-		if time_to_pay_food == true:
-			time_to_pay_food = false
-			food_pay_timer.start()
-			if food >= (10*hut):
-				food -= (10*hut)
-				num_food.text = str("food: ",food)
-			elif food < (10*hut):
-				pop -= 1
-				num_pop.text = str("population: ",pop)
-			elif pop == 0:
-				randomize()
-				var random_num = randi() % 16
-				print(random_num)
-				
-				if random_num <= 5:
-					lumberjack -= 1
-					num_lumberjack.text = str("lumberjack: ",lumberjack)
-				
-				elif random_num > 5 and random_num <= 10:
-					stone_gatherer -= 1
-					num_stone_gatherer.text = str("stone gatherer: ", stone_gatherer)
-				
-				elif random_num > 10:
-					farmer -= 1
-					num_farmer.text = str("farmer: ", farmer)
-					
-				else:
-					pass
-			else:
-				pass
-		else:
-			pass
-	else:
-		pass
-"""
-
 func _on_constructionLab_input_event(viewport, event, shape_idx):
 	
 	#unlock constructio lab
@@ -785,10 +724,16 @@ func _on_constructionLab_input_event(viewport, event, shape_idx):
 				axe.visible = true
 				hoe.visible = true
 				exit.visible = true
+				
 				if n_string >= 5:
 					bow.visible = true
 				else:
 					bow.visible = false
+				
+				if iron >= 70 and bow.visible == true:
+					iron_pickaxe.visible = true
+				else:
+					iron_pickaxe.visible = false
 	
 	pass # Replace with function body.
 
@@ -836,7 +781,7 @@ func _on_exit_input_event(viewport, event, shape_idx):
 			info_lumberjack.visible = true
 			info_stone_gatherer.visible = true
 			need_food.visible = true
-			num_fur.visible = true
+			
 			
 			
 			
@@ -884,10 +829,12 @@ func _on_exit_input_event(viewport, event, shape_idx):
 				hunter_min.visible = true
 				hunter_plus.visible = true
 				nhunter.visible = true
+				num_fur.visible = true
 			else:
 				hunter_min.visible = false
 				hunter_plus.visible = false
 				nhunter.visible = false
+				num_fur.visible = false
 			
 			
 			
@@ -902,6 +849,7 @@ func _on_exit_input_event(viewport, event, shape_idx):
 			bow.visible = false
 			compass.visible = false
 			leather.visible = false
+			iron_pickaxe.visible = false
 			
 			if n_string > 0:
 				num_string.visible = true
@@ -1107,6 +1055,7 @@ func _on_market_input_event(viewport, event, shape_idx):
 				nhunter.visible = false
 				info_hunter.visible = false
 				num_fur.visible = false
+				iron_pickaxe.visible = false
 				
 				#makes things visible 
 				exit.visible = true
@@ -1220,4 +1169,16 @@ func _on_hunter_min_input_event(viewport, event, shape_idx):
 	
 	if hunter == 0:
 		info_hunter.visible = false
+	pass # Replace with function body.
+
+
+func _on_buy_iron_pickaxe_input_event(viewport, event, shape_idx):
+	if event is InputEvent:
+		if event.is_pressed():
+			if wood >= 100 and iron >= 150:
+				wood -= 100
+				iron -= 150
+				num_wood.text = str("wood: ", wood)
+				num_iron.text = str("iron: ", iron)
+				get_node("buy_iron_pickaxe/Label").text = str("iron pickaxe (bought)")
 	pass # Replace with function body.
