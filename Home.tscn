@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://test.gd" type="Script" id=1]
 
@@ -68,6 +68,9 @@ extents = Vector2( 90.4673, 15.1751 )
 
 [sub_resource type="RectangleShape2D" id=24]
 extents = Vector2( 216.692, 16.0655 )
+
+[sub_resource type="RectangleShape2D" id=25]
+extents = Vector2( 69.755, 15.3777 )
 
 [node name="Node" type="Node"]
 script = ExtResource( 1 )
@@ -325,7 +328,6 @@ rect_scale = Vector2( 2, 2 )
 text = "farmer: 0"
 
 [node name="constructionLab" type="Area2D" parent="."]
-editor/display_folded = true
 position = Vector2( 125.386, 212.963 )
 __meta__ = {
 "_edit_group_": true
@@ -708,7 +710,7 @@ text = "bow (10 string, 100 wood)"
 
 [node name="hunting_hut" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 83.1015, 357.891 )
+position = Vector2( 84.1015, 357.891 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -724,7 +726,7 @@ margin_right = 136.983
 margin_bottom = 20.7116
 rect_scale = Vector2( 2, 2 )
 text = "Hunting hut
-(1050 wood, 500 stone, 20 iron)"
+ (1050 wood, 500 stone, 20 iron)"
 
 [node name="nfur" type="Label" parent="."]
 margin_left = 321.739
@@ -854,6 +856,33 @@ margin_bottom = 3.47382
 rect_scale = Vector2( 2, 2 )
 text = "iron pickaxe (100 wood, 150 iron)"
 
+[node name="gold_mine" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 77.8639, 395.96 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gold_mine"]
+position = Vector2( 3.70629, -1.14685 )
+shape = SubResource( 25 )
+
+[node name="Label" type="Label" parent="gold_mine"]
+margin_left = -59.0819
+margin_top = -15.0448
+margin_right = 4.91811
+margin_bottom = -1.0448
+rect_scale = Vector2( 2, 2 )
+text = "gold mine"
+
+[node name="ngold" type="Label" parent="."]
+margin_left = 321.571
+margin_top = 381.888
+margin_right = 364.571
+margin_bottom = 395.888
+rect_scale = Vector2( 2, 2 )
+text = "gold: 0"
+
 [connection signal="input_event" from="gather_wood" to="." method="_on_gather_wood_input_event"]
 [connection signal="input_event" from="gather_stone" to="." method="_on_gather_stone_input_event"]
 [connection signal="input_event" from="build_hut" to="build_hut" method="_on_build_hut_input_event"]
@@ -887,3 +916,4 @@ text = "iron pickaxe (100 wood, 150 iron)"
 [connection signal="input_event" from="hunter_plus" to="." method="_on_hunter_plus_input_event"]
 [connection signal="input_event" from="hunter_min" to="." method="_on_hunter_min_input_event"]
 [connection signal="input_event" from="buy_iron_pickaxe" to="." method="_on_buy_iron_pickaxe_input_event"]
+[connection signal="input_event" from="gold_mine" to="." method="_on_gold_mine_input_event"]

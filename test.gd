@@ -64,6 +64,7 @@ onready var num_string = get_node("nstring")
 onready var num_bone = get_node("nbone")
 onready var num_fur = get_node("nfur")
 onready var num_leather = get_node("nleather")
+onready var num_gold = get_node("ngold")
 
 
 #lumberjack
@@ -118,6 +119,7 @@ onready var leather = get_node("buy_leather")
 #mines
 onready var carbon_mine = get_node("carbon_mine")
 onready var iron_mine = get_node("iron_mine")
+onready var gold_mine = get_node("gold_mine")
 
 #explication notes
 onready var info_lumberjack = get_node("info_lumberjack")
@@ -212,6 +214,7 @@ func _ready():
 	num_bone.visible = false
 	num_fur.visible = false
 	num_leather.visible = false
+	num_gold.visible = false
 	
 	#makes buildings non visible
 	construction_lab.visible = false
@@ -221,6 +224,7 @@ func _ready():
 	#makes mines non visible
 	carbon_mine.visible = false
 	iron_mine.visible = false
+	gold_mine.visible = false
 	
 	
 	pass
@@ -654,13 +658,14 @@ func _on_constructionLab_input_event(viewport, event, shape_idx):
 	#unlock constructio lab
 	if event is InputEvent:
 		if event.is_pressed() and not event.is_echo():
-			if wood >= 500 and stone >= 150:
+			if wood >= 500 and stone >= 150 and get_node("constructionLab/Label").text == str("Construction Lab (500 wood, 150 stone)"):
 				wood -= 500
 				num_wood.text = str("wood: ", wood)
 				stone -= 150
 				num_stone.text = str("stone: ", stone)
 				get_node("constructionLab/Label").text = str("Construction Lab")
-				
+			elif get_node("constructionLab/Label").text == str("Construction Lab"):
+				pass
 	
 	#get to the lab
 	if get_node("constructionLab/Label").text == str("Construction Lab"):
@@ -718,6 +723,8 @@ func _on_constructionLab_input_event(viewport, event, shape_idx):
 				hunter_plus.visible = false
 				nhunter.visible = false
 				info_hunter.visible = false
+				num_gold.visible = false
+				gold_mine.visible = false
 				
 				#makes items and exit visible
 				pickaxe.visible = true
@@ -725,7 +732,7 @@ func _on_constructionLab_input_event(viewport, event, shape_idx):
 				hoe.visible = true
 				exit.visible = true
 				
-				if n_string >= 5:
+				if n_string >= 5 or get_node("buy_bow/Label").text == str("bow (bought)"):
 					bow.visible = true
 				else:
 					bow.visible = false
@@ -734,6 +741,9 @@ func _on_constructionLab_input_event(viewport, event, shape_idx):
 					iron_pickaxe.visible = true
 				else:
 					iron_pickaxe.visible = false
+					
+				#if get_node("buy_bow/Label").text == str("bow (bought)"):
+					#bow.visible = true
 	
 	pass # Replace with function body.
 
@@ -836,7 +846,13 @@ func _on_exit_input_event(viewport, event, shape_idx):
 				nhunter.visible = false
 				num_fur.visible = false
 			
-			
+			if get_node("buy_iron_pickaxe/Label").text == str("iron pickaxe (bought)"):
+				num_gold.visible = true
+				gold_mine.visible = true
+			else:
+				num_gold.visible = false
+				gold_mine.visible = false
+				
 			
 			
 			#makes items and exit non visible
@@ -861,7 +877,7 @@ func _on_exit_input_event(viewport, event, shape_idx):
 			else:
 				num_bone.visible = false
 			
-			if iron >= 50:
+			if iron >= 50 or get_node("market/Label").text == str("Market"):
 				market.visible = true
 				
 			if n_leather > 0:
@@ -909,7 +925,7 @@ func _on_iron_mine_input_event(viewport, event, shape_idx):
 			iron += 1
 			num_iron.text = str("iron: ", iron)
 	
-	if iron >= 50:
+	if iron >= 50 or get_node("market/Label").text == str("Market"):
 		market.visible = true
 	pass # Replace with function body.
 
@@ -994,14 +1010,15 @@ func _on_iron_miner_min_input_event(viewport, event, shape_idx):
 func _on_market_input_event(viewport, event, shape_idx):
 	
 	if event is InputEvent:
-		if event.is_pressed() and not event.is_echo():
+		if event.is_pressed() and not event.is_echo() and get_node("market/Label").text == str("Market (750 wood, 350 stone)"):
 			if wood >= 750 and stone >= 350:
 				wood -= 750
 				num_wood.text = str("wood: ", wood)
 				stone -= 350
 				num_stone.text = str("stone: ", stone)
 				get_node("market/Label").text = str("Market")
-				
+			elif get_node("market/Label").text == str("Market"):
+				pass
 	
 	#get to the lab
 	if get_node("market/Label").text == str("Market"):
@@ -1056,6 +1073,8 @@ func _on_market_input_event(viewport, event, shape_idx):
 				info_hunter.visible = false
 				num_fur.visible = false
 				iron_pickaxe.visible = false
+				num_gold.visible = false
+				gold_mine.visible = false
 				
 				#makes things visible 
 				exit.visible = true
@@ -1103,7 +1122,7 @@ func _on_buy_bow_input_event(viewport, event, shape_idx):
 func _on_hunting_hut_input_event(viewport, event, shape_idx):
 	if event is InputEvent:
 		if event.is_pressed():
-			if wood >= 1050 and stone >= 500 and iron >= 20:
+			if wood >= 1050 and stone >= 500 and iron >= 20 and get_node("hunting_hut/Label").text == str("Hunting hut (1050 wood, 500 stone, 20 iron)"):
 				get_node("hunting_hut/Label").text = str("Hunting hut")
 				wood -= 1050
 				stone -= 500
@@ -1115,9 +1134,11 @@ func _on_hunting_hut_input_event(viewport, event, shape_idx):
 				hunter_plus.visible = true
 				nhunter.visible = true
 				num_fur.visible = true
+			elif get_node("hunting_hut/Label").text == str("Hunting hut"):
+				pass
 	pass # Replace with function body.
 
-"""REMEMBER TO CHECK IF THIS WORKS WHENT CREATING GOLD MINERS"""
+
 func _on_buy_compass_input_event(viewport, event, shape_idx):
 	if event is InputEvent:
 		if event.is_pressed():
@@ -1125,7 +1146,7 @@ func _on_buy_compass_input_event(viewport, event, shape_idx):
 				iron -= 100
 				num_iron.text = str("iron: ", iron)
 				gold -= 10
-				#REMEMBER TO MAKE GOLD COUNT ON SCREEN CHANGE
+				num_gold.text = str("gold: ", gold)
 				get_node("buy_compass/Label").text = str("compass (bought)")
 	pass # Replace with function body.
 
@@ -1181,4 +1202,12 @@ func _on_buy_iron_pickaxe_input_event(viewport, event, shape_idx):
 				num_wood.text = str("wood: ", wood)
 				num_iron.text = str("iron: ", iron)
 				get_node("buy_iron_pickaxe/Label").text = str("iron pickaxe (bought)")
+	pass # Replace with function body.
+
+
+func _on_gold_mine_input_event(viewport, event, shape_idx):
+	if event is InputEvent:
+		if event.is_pressed():
+			gold += 1
+			num_gold.text = str("gold: ", gold)
 	pass # Replace with function body.
