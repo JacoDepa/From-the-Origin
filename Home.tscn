@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://test.gd" type="Script" id=1]
 
@@ -71,6 +71,9 @@ extents = Vector2( 216.692, 16.0655 )
 
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 69.755, 15.3777 )
+
+[sub_resource type="RectangleShape2D" id=26]
+extents = Vector2( 11.8156, 12.8713 )
 
 [node name="Node" type="Node"]
 script = ExtResource( 1 )
@@ -777,10 +780,10 @@ position = Vector2( 6.51599, 0 )
 shape = SubResource( 21 )
 
 [node name="nleather" type="Label" parent="."]
-margin_left = 322.325
-margin_top = 352.636
-margin_right = 383.325
-margin_bottom = 366.636
+margin_left = 322.0
+margin_top = 351.0
+margin_right = 390.0
+margin_bottom = 365.0
 rect_scale = Vector2( 2, 2 )
 text = "leather: 0"
 
@@ -883,6 +886,58 @@ margin_bottom = 395.888
 rect_scale = Vector2( 2, 2 )
 text = "gold: 0"
 
+[node name="gold_miner+" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 750.444, 311.922 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gold_miner+"]
+shape = SubResource( 26 )
+
+[node name="Label" type="Label" parent="gold_miner+"]
+margin_left = -7.53394
+margin_top = -13.3327
+margin_right = 9.46606
+margin_bottom = 0.667267
+rect_scale = Vector2( 2, 2 )
+text = "+ /"
+
+[node name="gold_miner-" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 793.359, 309.563 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gold_miner-"]
+position = Vector2( -1.54756, 1.54756 )
+shape = SubResource( 26 )
+
+[node name="Label" type="Label" parent="gold_miner-"]
+margin_left = -8.0
+margin_top = -23.0
+margin_right = -2.0
+margin_bottom = -9.0
+rect_scale = Vector2( 2, 2 )
+text = "_"
+
+[node name="ngold_miner" type="Label" parent="."]
+margin_left = 543.118
+margin_top = 301.402
+margin_right = 630.118
+margin_bottom = 315.402
+rect_scale = Vector2( 2, 2 )
+text = "gold_miner: 0"
+
+[node name="info_gold_miner" type="Label" parent="."]
+visible = false
+margin_left = 545.796
+margin_top = 333.402
+margin_right = 654.796
+margin_bottom = 347.402
+text = "+0 gold in 40 sec"
 [connection signal="input_event" from="gather_wood" to="." method="_on_gather_wood_input_event"]
 [connection signal="input_event" from="gather_stone" to="." method="_on_gather_stone_input_event"]
 [connection signal="input_event" from="build_hut" to="build_hut" method="_on_build_hut_input_event"]
@@ -917,3 +972,5 @@ text = "gold: 0"
 [connection signal="input_event" from="hunter_min" to="." method="_on_hunter_min_input_event"]
 [connection signal="input_event" from="buy_iron_pickaxe" to="." method="_on_buy_iron_pickaxe_input_event"]
 [connection signal="input_event" from="gold_mine" to="." method="_on_gold_mine_input_event"]
+[connection signal="input_event" from="gold_miner+" to="." method="_on_gold_miner_input_event"]
+[connection signal="input_event" from="gold_miner-" to="." method="_on_gold_miner_min_input_event"]

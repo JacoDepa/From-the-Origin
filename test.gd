@@ -4,8 +4,8 @@ extends Node
 onready var hut = 0
 onready var pop = 0
 onready var food = 0
-onready var wood = 1000000
-onready var stone = 1000000
+onready var wood = 100000
+onready var stone = 100000
 onready var nwood = 50
 onready var flag = 0
 onready var lumberjack = 0
@@ -21,6 +21,7 @@ onready var gold = 0
 onready var fur = 0
 onready var n_leather = 0
 onready var hunter = 0 
+onready var gold_miner = 0
 
 #Timer
 onready var timerWood = null
@@ -29,6 +30,7 @@ onready var timerFood = null
 onready var timerCarbon = null
 onready var timerIron = null
 onready var timerHunter = null
+onready var timerGold = null
 
 onready var delay = 10
 onready var mine_delay = 40 
@@ -40,6 +42,7 @@ onready var can_gather_food = true
 onready var can_gather_carbon = true
 onready var can_gather_iron = true
 onready var can_gather_fur = true
+onready var can_gather_gold = true
 
 
 #Buttons
@@ -97,6 +100,11 @@ onready var hunter_plus = get_node("hunter_plus")
 onready var hunter_min = get_node("hunter_min")
 onready var nhunter = get_node("nhunter")
 
+#gold miner
+onready var gold_miner_plus = get_node("gold_miner+")
+onready var gold_miner_min = get_node("gold_miner-")
+onready var ngold_miner = get_node("ngold_miner")
+
 #Buildings
 onready var construction_lab = get_node("constructionLab")
 onready var market = get_node("market")
@@ -128,6 +136,7 @@ onready var info_farmer = get_node("info_farmer")
 onready var info_carbon_miner = get_node("info_carbon_miner")
 onready var info_iron_miner = get_node("info_iron_miner")
 onready var info_hunter = get_node("info_hunter")
+onready var info_gold_miner = get_node("info_gold_miner")
 onready var need_food = get_node("need_food")
 
 func _ready():
@@ -174,6 +183,13 @@ func _ready():
 	timerHunter.connect("timeout", self, "on_timeout_complete_fur")
 	add_child(timerHunter)
 	
+	#auto gather gold timer
+	timerGold = Timer.new()
+	timerGold.set_one_shot(true)
+	timerGold.set_wait_time(mine_delay)
+	timerGold.connect("timeout", self, "on_timeout_complete_gold")
+	add_child(timerGold)
+	
 	
 	#makes works and works num non visible
 	lumberjack_plus.visible = false
@@ -194,6 +210,9 @@ func _ready():
 	hunter_min.visible = false
 	hunter_plus.visible = false
 	nhunter.visible = false
+	gold_miner_min.visible = false
+	gold_miner_plus.visible = false
+	ngold_miner.visible = false
 	
 	#make buttons non visibles
 	gather_stone.visible = false
@@ -268,6 +287,10 @@ func on_timeout_complete_fur():
 	can_gather_fur = true
 	auto_gather_fur()
 
+#activate gold auto gather
+func on_timeout_complete_gold():
+	can_gather_gold = true
+	auto_gather_gold()
 
 #gather wood
 func _on_gather_wood_input_event(viewport, event, shape_idx):
@@ -652,20 +675,41 @@ func auto_gather_fur():
 	else:
 		pass
 
+#auto gather 2 gold every 40 sec per gold miner
+func auto_gather_gold():
+	if food > 0:
+		if gold_miner > 0:
+			print("gm > 0")
+			if can_gather_gold == true:
+				print("cgg == true")
+				gold += (2 * gold_miner)
+				food -= gold_miner
+				num_food.text = str("food: ", food)
+				num_gold.text = str("gold: ", gold)
+				can_gather_gold = false
+				timerGold.start()
+				
+			else:
+				pass
+		else:
+			pass
+	else:
+		pass
 
 func _on_constructionLab_input_event(viewport, event, shape_idx):
 	
 	#unlock constructio lab
 	if event is InputEvent:
 		if event.is_pressed() and not event.is_echo():
-			if wood >= 500 and stone >= 150 and get_node("constructionLab/Label").text == str("Construction Lab (500 wood, 150 stone)"):
+			
+			if get_node("constructionLab/Label").text == str("Construction Lab"):
+				pass
+			elif wood >= 500 and stone >= 150:
 				wood -= 500
 				num_wood.text = str("wood: ", wood)
 				stone -= 150
 				num_stone.text = str("stone: ", stone)
 				get_node("constructionLab/Label").text = str("Construction Lab")
-			elif get_node("constructionLab/Label").text == str("Construction Lab"):
-				pass
 	
 	#get to the lab
 	if get_node("constructionLab/Label").text == str("Construction Lab"):
@@ -725,6 +769,10 @@ func _on_constructionLab_input_event(viewport, event, shape_idx):
 				info_hunter.visible = false
 				num_gold.visible = false
 				gold_mine.visible = false
+				gold_miner_min.visible = false
+				gold_miner_plus.visible = false
+				ngold_miner.visible = false
+				info_gold_miner.visible = false
 				
 				#makes items and exit visible
 				pickaxe.visible = true
@@ -849,9 +897,17 @@ func _on_exit_input_event(viewport, event, shape_idx):
 			if get_node("buy_iron_pickaxe/Label").text == str("iron pickaxe (bought)"):
 				num_gold.visible = true
 				gold_mine.visible = true
+				gold_miner_min.visible = true
+				gold_miner_plus.visible = true
+				ngold_miner.visible = true
+				info_gold_miner.visible = true
 			else:
 				num_gold.visible = false
 				gold_mine.visible = false
+				gold_miner_min.visible = false
+				gold_miner_plus.visible = false
+				ngold_miner.visible = false
+				info_gold_miner.visible = false
 				
 			
 			
@@ -1011,14 +1067,15 @@ func _on_market_input_event(viewport, event, shape_idx):
 	
 	if event is InputEvent:
 		if event.is_pressed() and not event.is_echo() and get_node("market/Label").text == str("Market (750 wood, 350 stone)"):
+			
+			if get_node("market/Label").text == str("Market"):
+				pass
 			if wood >= 750 and stone >= 350:
 				wood -= 750
 				num_wood.text = str("wood: ", wood)
 				stone -= 350
 				num_stone.text = str("stone: ", stone)
 				get_node("market/Label").text = str("Market")
-			elif get_node("market/Label").text == str("Market"):
-				pass
 	
 	#get to the lab
 	if get_node("market/Label").text == str("Market"):
@@ -1075,6 +1132,10 @@ func _on_market_input_event(viewport, event, shape_idx):
 				iron_pickaxe.visible = false
 				num_gold.visible = false
 				gold_mine.visible = false
+				gold_miner_min.visible = false
+				gold_miner_plus.visible = false
+				ngold_miner.visible = false
+				info_gold_miner.visible = false
 				
 				#makes things visible 
 				exit.visible = true
@@ -1122,7 +1183,10 @@ func _on_buy_bow_input_event(viewport, event, shape_idx):
 func _on_hunting_hut_input_event(viewport, event, shape_idx):
 	if event is InputEvent:
 		if event.is_pressed():
-			if wood >= 1050 and stone >= 500 and iron >= 20 and get_node("hunting_hut/Label").text == str("Hunting hut (1050 wood, 500 stone, 20 iron)"):
+			
+			if get_node("hunting_hut/Label").text == str("Hunting hut"):
+				pass
+			elif wood >= 1050 and stone >= 500 and iron >= 20:
 				get_node("hunting_hut/Label").text = str("Hunting hut")
 				wood -= 1050
 				stone -= 500
@@ -1134,8 +1198,6 @@ func _on_hunting_hut_input_event(viewport, event, shape_idx):
 				hunter_plus.visible = true
 				nhunter.visible = true
 				num_fur.visible = true
-			elif get_node("hunting_hut/Label").text == str("Hunting hut"):
-				pass
 	pass # Replace with function body.
 
 
@@ -1210,4 +1272,35 @@ func _on_gold_mine_input_event(viewport, event, shape_idx):
 		if event.is_pressed():
 			gold += 1
 			num_gold.text = str("gold: ", gold)
+	pass # Replace with function body.
+
+
+func _on_gold_miner_input_event(viewport, event, shape_idx):
+	if event is InputEvent:
+		if event.is_pressed():
+			if pop > 0:
+				gold_miner += 1
+				pop -= 1
+				ngold_miner.text = str("gold miner: ", gold_miner)
+				num_pop.text = str("population: ", pop)
+	
+	if gold_miner > 0:
+		info_gold_miner.visible = true
+		info_gold_miner.text = str("+", (2 * gold_miner), " gold in 40 sec")
+	
+	auto_gather_gold()
+	pass # Replace with function body.
+
+
+func _on_gold_miner_min_input_event(viewport, event, shape_idx):
+	if event is InputEvent:
+		if event.is_pressed():
+			if gold_miner > 0:
+				pop += 1
+				gold_miner -= 1
+				ngold_miner.text = str("gold miner: ", gold_miner)
+				num_pop.text = str("population: ", pop)
+	
+	if gold_miner == 0:
+		info_gold_miner.visible = false
 	pass # Replace with function body.

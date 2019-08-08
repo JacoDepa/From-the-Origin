@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="clicker"
+config/name="From the Origin"
 run/main_scene="res://Home.tscn"
 config/icon="res://icon.png"
 
